@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     get "/pages/:id" => "pages#show"
 
     get "/books/:id" => "books#show"
+    post "/books" => "books#create"
   end
 end
