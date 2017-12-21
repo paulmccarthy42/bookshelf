@@ -11,3 +11,7 @@ User.create(
   email: "paul@email.com", 
   password: "password", 
   password_confirmation: "password")
+
+BookSelection.create(
+  book_id: 1,
+  book_shelf_id)
