@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :v1 do
+    get "/pages" => "pages#index"
+    post "/pages" => "pages#create"
+    get "/pages/:id" => "pages#show"
+
+    get "/books/:id" => "books#show"
+  end
 end
