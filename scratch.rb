@@ -1,5 +1,5 @@
 require 'unirest'
-require 'pp'
+
 
 def generate_pages(gutenberg_id, book_id) #move to books controller, change to call pages methods rather than pages API
   response = Unirest.get("https://gutenbergapi.org/texts/#{gutenberg_id}/body")
@@ -24,18 +24,8 @@ def generate_pages(gutenberg_id, book_id) #move to books controller, change to c
   end
 end
 
-def generate_book(number) #move to books controller
-  response = Unirest.get("https://gutenbergapi.org/texts/#{number}")
-  params = {}
-  params[:title] = response.body["metadata"]["title"][0]
-  params[:author] = response.body["metadata"]["author"][0]
-  params[:language] = response.body["metadata"]["language"][0]
-  pp response.body["metadata"]
-  response = Unirest.post("localhost:3000/v1/books", parameters: params)
-end
-
 print "Give me a number: "
 input_number = gets.chomp.to_i
-generate_book(input_number)
+response = Unirest.post("localhost:3000/v1/books", parameters: {gutenberg_id: input_number})
 generate_pages(number, response.body["id"])
 
