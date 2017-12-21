@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post "/pages" => "pages#create"
     get "/pages/:id" => "pages#show"
 
+    get "books/:id/read" => "books#read"
     get "/books/:id" => "books#show"
     post "/books" => "books#create"
   end

@@ -17,7 +17,10 @@ class V1::PagesController < ApplicationController
     if page.save
       render jsn: page.as_json
     else
-      render json: "NOOOOOOOO!!!"
+      render json: "Error creating page"
     end
   end
+
+
 end
+

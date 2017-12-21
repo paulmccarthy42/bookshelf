@@ -9,4 +9,8 @@ class Page < ApplicationRecord
     pretty_page += "\n"
     return pretty_page
   end
+
+  def test(message)
+    puts message
+  end
 end

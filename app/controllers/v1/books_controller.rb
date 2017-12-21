@@ -1,6 +1,11 @@
 class V1::BooksController < ApplicationController
   def show
     book = Book.find_by(id: params[:id])
+    render json: book.as_json
+  end
+
+  def read
+    book = Book.find_by(id: params[:id])
     display = ""
     book.pages.each do |page|
       display += page.display
@@ -21,9 +26,10 @@ class V1::BooksController < ApplicationController
     book.language = response.body["metadata"]["language"][0]
     book.published_year = 2525
     if book.save
+      book.generate_pages(number)
       render json: book.as_json
     else
-      render json: "NOOOOOOOO!!!"
+      render json: "Error creating book"
     end
   end
 end
