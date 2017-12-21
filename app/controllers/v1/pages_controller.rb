@@ -6,6 +6,11 @@ class V1::PagesController < ApplicationController
 
   def show
     page = Page.find_by(id: params[:id])
+    render json: page.as_json
+  end
+
+  def read
+    page = Page.find_by(id: params[:id])
     render json: page.display
   end
 

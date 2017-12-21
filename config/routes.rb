@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     get "/pages" => "pages#index"
     post "/pages" => "pages#create"
+    get "pages/:id/read" => "pages#read"
     get "/pages/:id" => "pages#show"
 
     get "books/:id/read" => "books#read"
