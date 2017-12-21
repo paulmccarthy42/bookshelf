@@ -11,11 +11,14 @@ class V1::BooksController < ApplicationController
   end
 
   def create
+    number = params["gutenberg_id"]
+    response = Unirest.get("https://gutenbergapi.org/texts/#{number}")
+
     book = Book.new
-    book.title = params[:title]
-    book.author = params[:author]
+    book.title = response.body["metadata"]["title"][0]
+    book.author = response.body["metadata"]["author"][0]
     book.genre = "Test Genre"
-    book.language = params[:language]
+    book.language = response.body["metadata"]["language"][0]
     book.published_year = 2525
     if book.save
       render json: book.as_json
