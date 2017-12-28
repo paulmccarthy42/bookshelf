@@ -19,8 +19,9 @@ class V1::PagesController < ApplicationController
     page.book_id = params[:book_id]
     page.text = params[:text]
     page.page_number = params[:page_number]
+    #move page saving 
     if page.save
-      render jsn: page.as_json
+      render json: page.as_json
     else
       render json: "Error creating page"
     end

@@ -43,7 +43,8 @@ var AddBookPage = {
   data: function() {
     return {
       searching: true,
-      bookInfo: {}
+      bookInfo: {},
+      errors: []
     };
   },
   created: function() {},

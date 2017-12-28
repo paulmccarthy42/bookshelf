@@ -18,7 +18,7 @@ class Book < ApplicationRecord
     end
   end
 
-  def generate_pages(gutenberg_id)
+  def generate_pages(gutenberg_id, saveables)
     response = Unirest.get("https://gutenbergapi.org/texts/#{gutenberg_id}/body")
     lines = []
     response.body["body"].each_line {|line| lines << line}
