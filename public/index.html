@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Shlf</title>
+  <!-- CSS -->
+  <style type="index.css"></style>
   <!-- Vue -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -75,8 +77,18 @@
 
 <template id="add-book-page">
   <div>
-    <p>Please give me the Gutenberg ID of the book you want to add</p>
-    <input type="number" v-bind:to="gutenbergId" v-if="searching">  
-    <button v-on:click = "searchGutenberg">search</button>
+    <div v-if="searching">
+      <p>Please give me the Gutenberg ID of the book you want to add</p>
+      <input type="number" v-model="gutenbergId">  
+      <button v-on:click = "searchGutenberg">search</button>
+    </div>
+    <div v-if="!searching">
+      <div>Title: <input class = "new" type="text" v-model="bookInfo.title"></div>
+      <div>Author: <input class = "new" type="text" v-model="bookInfo.author"></div>
+      <div>Genre: <input class = "new" type="text" v-model="bookInfo.genre"></div>
+      <div>Year Published: <input class = "new" type="number" v-model="bookInfo.published_year"></div>
+      <button>Submit</button>
+      <button v-on:click="toggleSearching">Back</button>
+    </div>
   </div>
 </template>

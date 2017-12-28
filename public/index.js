@@ -42,20 +42,42 @@ var AddBookPage = {
   template: "#add-book-page",
   data: function() {
     return {
-      gutenbergId: "",
+      gutenbergId: null,
       searching: true,
-      bookMetadata: {}
+      bookInfo: {}
     };
   },
   created: function() {},
   methods: {
     searchGutenberg: function() {
       // check and see if already found
-      // pull info about book itself
-      axios
-        .get("https://gutenbergapi.org/texts/" + this.gutenbergId)
-        .then(function(response) {});
-    }.bind(this)
+      axios.get("https://gutenbergapi.org/texts/" + this.gutenbergId).then(
+        function(response) {
+          this.bookInfo.title = response.data.metadata.title;
+          this.bookInfo.author = response.data.metadata.author;
+          this.bookInfo.language = response.data.metadata.language;
+          console.log(this.gutenbergId);
+          axios
+            .get("/v1/books/check", {
+              params: { gutenberg_id: this.gutenbergId }
+            })
+            .then(
+              function(response) {
+                if (response.data === "pass") {
+                  console.log("true");
+                  this.toggleSearching();
+                } else {
+                  console.log("false");
+                  return false;
+                }
+              }.bind(this)
+            );
+        }.bind(this)
+      );
+    },
+    toggleSearching: function() {
+      this.searching = !this.searching;
+    }
     // second method pushing gberg data to database and calling page controllers
   },
   computed: {}

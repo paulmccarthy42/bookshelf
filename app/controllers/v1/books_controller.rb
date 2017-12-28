@@ -9,40 +9,35 @@ class V1::BooksController < ApplicationController
     render json: book.as_json
   end
 
-  def read
-    book = Book.find_by(id: params[:id])
-    display = ""
-    book.pages.each do |page|
-      display += page.display
-      display += "-"*150
-      display += "\n"
+  def check
+    number = params["gutenberg_id"] 
+    existing_books = Book.where(gutenberg_id: number)
+    p existing_books.length
+    p params
+    if existing_books.length > 0
+      render json: "fail"
+    else
+
+      render json: "pass"
     end
-    render json: display
   end
 
   def create
-    number = params["gutenberg_id"]
-    existing_books = Book.where(gutenberg_id: number)
-    if existing_books.length > 0
-      id = existing_books[0].id
-      render json: "sorry looks like this book was already downloaded. Check out book number #{id}"
-      # move above check to second search route
+    # move this gberg api pull out of controller into front end, take book inputs from user
+    response = Unirest.get("https://gutenbergapi.org/texts/#{number}")
+    book = Book.new
+    book.title = response.body["metadata"]["title"][0]
+    book.author = response.body["metadata"]["author"][0]
+    book.genre = "Test Genre"
+    book.language = response.body["metadata"]["language"][0]
+    book.published_year = 2525
+    book.gutenberg_id = number
+    if book.save
+      book.generate_pages(number)
+      render json: book.as_json
     else
-      # move this gberg api pull out of controller into front end, take book inputs from user
-      response = Unirest.get("https://gutenbergapi.org/texts/#{number}")
-      book = Book.new
-      book.title = response.body["metadata"]["title"][0]
-      book.author = response.body["metadata"]["author"][0]
-      book.genre = "Test Genre"
-      book.language = response.body["metadata"]["language"][0]
-      book.published_year = 2525
-      book.gutenberg_id = number
-      if book.save
-        book.generate_pages(number)
-        render json: book.as_json
-      else
-        render json: "Error creating book"
-      end
+      render json: "Error creating book"
+
     end
   end
 end
