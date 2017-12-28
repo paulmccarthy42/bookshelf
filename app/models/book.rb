@@ -50,7 +50,8 @@ class Book < ApplicationRecord
       genre: genre,
       language: language,
       published_year: published_year,
-      pages: pages.length
+      pages: pages.length,
+      first_page: pages[0].id
     }
   end
 end

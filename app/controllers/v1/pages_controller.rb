@@ -10,7 +10,7 @@ class V1::PagesController < ApplicationController
   end
 
   def read
-    page = Page.find_by(id: params[:id])
+    page = Page.where(book_id: params[:book_id]).find_by(page_number: params[:page_number])
     render json: page.display
   end
 

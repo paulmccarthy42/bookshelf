@@ -3,3 +3,4 @@ class AddPageNumberToPage < ActiveRecord::Migration[5.1]
     add_column :pages, :page_number, :integer
   end
 end
+
