@@ -18,7 +18,9 @@ class Book < ApplicationRecord
     end
   end
 
-  def generate_pages(gutenberg_id, saveables)
+  #refactor to return array of new, unsaved pages
+  def generate_pages(gutenberg_id, book_id)
+    page_list = []
     response = Unirest.get("https://gutenbergapi.org/texts/#{gutenberg_id}/body")
     lines = []
     response.body["body"].each_line {|line| lines << line}
@@ -30,16 +32,17 @@ class Book < ApplicationRecord
     page_start = 0
     page_end = 40
     for x in 0..pages
-      params = {
-        book_id: id,
+      page = Page.new(
+        book_id: book_id,
         page_number: page_number,
         text: lines[page_start..page_end].join()
-      }
-      response = Unirest.post("localhost:3000/v1/pages", parameters: params)
+      )
+      page_list << page
       page_number += 1
       page_start += 40
       page_end += 40 
     end
+    return page_list
   end
 
   def as_json

@@ -31,14 +31,16 @@ class V1::BooksController < ApplicationController
     book.language = params["language"]
     book.published_year = params["published_year"]
     book.gutenberg_id = params["gutenberg_id"]
-    saveable = [book]
-    book.generate_pages(params["gutenberg_id"], saveable)
-
-    saveable.each do |x|
-      x.save
+    if book.save
+      pages = book.generate_pages(book.gutenberg_id, book.id)
+      if pages.all? {|page| page.save}
+        render json: "success baby"
+      else
+        render json: "error creating pages"
+        book.delete
+      end
+    else
+      render json: "error creating book"
     end
-
-
-
   end
 end

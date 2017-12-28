@@ -83,7 +83,7 @@ var AddBookPage = {
     submitNewBook: function() {
       axios.post("/v1/books", this.bookInfo).then(
         function() {
-          this.toggleSearching();
+          router.push("/");
         }.bind(this)
       );
     }
