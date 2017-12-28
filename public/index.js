@@ -42,7 +42,6 @@ var AddBookPage = {
   template: "#add-book-page",
   data: function() {
     return {
-      gutenbergId: null,
       searching: true,
       bookInfo: {}
     };
@@ -51,32 +50,41 @@ var AddBookPage = {
   methods: {
     searchGutenberg: function() {
       // check and see if already found
-      axios.get("https://gutenbergapi.org/texts/" + this.gutenbergId).then(
-        function(response) {
-          this.bookInfo.title = response.data.metadata.title;
-          this.bookInfo.author = response.data.metadata.author;
-          this.bookInfo.language = response.data.metadata.language;
-          console.log(this.gutenbergId);
-          axios
-            .get("/v1/books/check", {
-              params: { gutenberg_id: this.gutenbergId }
-            })
-            .then(
-              function(response) {
-                if (response.data === "pass") {
-                  console.log("true");
-                  this.toggleSearching();
-                } else {
-                  console.log("false");
-                  return false;
-                }
-              }.bind(this)
-            );
-        }.bind(this)
-      );
+      axios
+        .get("https://gutenbergapi.org/texts/" + this.bookInfo.gutenberg_id)
+        .then(
+          function(response) {
+            this.bookInfo.title = response.data.metadata.title[0];
+            this.bookInfo.author = response.data.metadata.author[0];
+            this.bookInfo.language = response.data.metadata.language[0];
+            console.log(this.bookInfo.gutenberg_id);
+            axios
+              .get("/v1/books/check", {
+                params: { gutenberg_id: this.bookInfo.gutenberg_id }
+              })
+              .then(
+                function(response) {
+                  if (response.data === "pass") {
+                    console.log("true");
+                    this.toggleSearching();
+                  } else {
+                    console.log("false");
+                    return false;
+                  }
+                }.bind(this)
+              );
+          }.bind(this)
+        );
     },
     toggleSearching: function() {
       this.searching = !this.searching;
+    },
+    submitNewBook: function() {
+      axios.post("/v1/books", this.bookInfo).then(
+        function() {
+          this.toggleSearching();
+        }.bind(this)
+      );
     }
     // second method pushing gberg data to database and calling page controllers
   },

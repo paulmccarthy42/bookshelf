@@ -24,16 +24,16 @@ class V1::BooksController < ApplicationController
 
   def create
     # move this gberg api pull out of controller into front end, take book inputs from user
-    response = Unirest.get("https://gutenbergapi.org/texts/#{number}")
+    # response = Unirest.get("https://gutenbergapi.org/texts/#{number}")
     book = Book.new
-    book.title = response.body["metadata"]["title"][0]
-    book.author = response.body["metadata"]["author"][0]
-    book.genre = "Test Genre"
-    book.language = response.body["metadata"]["language"][0]
-    book.published_year = 2525
-    book.gutenberg_id = number
+    book.title = params["title"]
+    book.author = params["author"]
+    book.genre = params["genre"]
+    book.language = params["language"]
+    book.published_year = params["published_year"]
+    book.gutenberg_id = params["gutenberg_id"]
     if book.save
-      book.generate_pages(number)
+      book.generate_pages(params["gutenberg_id"])
       render json: book.as_json
     else
       render json: "Error creating book"

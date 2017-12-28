@@ -27,7 +27,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/#/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#/book/new">Add New Book</a>
@@ -79,7 +79,7 @@
   <div>
     <div v-if="searching">
       <p>Please give me the Gutenberg ID of the book you want to add</p>
-      <input type="number" v-model="gutenbergId">  
+      <input type="number" v-model="bookInfo.gutenberg_id">  
       <button v-on:click = "searchGutenberg">search</button>
     </div>
     <div v-if="!searching">
@@ -87,7 +87,7 @@
       <div>Author: <input class = "new" type="text" v-model="bookInfo.author"></div>
       <div>Genre: <input class = "new" type="text" v-model="bookInfo.genre"></div>
       <div>Year Published: <input class = "new" type="number" v-model="bookInfo.published_year"></div>
-      <button>Submit</button>
+      <button v-on:click="submitNewBook">Submit</button>
       <button v-on:click="toggleSearching">Back</button>
     </div>
   </div>
