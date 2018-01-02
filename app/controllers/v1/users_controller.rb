@@ -12,4 +12,12 @@ class V1::UsersController < ApplicationController
       render json: {errors: user.errors.full_messages}, status: :bad_request
     end
   end
+
+  def check_current
+    if current_user
+      render json: current_user.as_json
+    else
+      render json: {errors: "Not logged in"}, status: :unauthorized
+    end
+  end
 end

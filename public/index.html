@@ -84,15 +84,32 @@
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
   </div>
 </template>
+
 <!-- Home Page with login screen, last book read, bookshelves, and recent notes -->
 <template id="home-page">
   <div class="container">
     <h1>{{ message }}</h1>
-    <div v-for='book in books'>
-      <h3>{{book.title}}</h3>
-      <p>{{book}}</p>
-      <router-link v-bind:to="{path: '/book/' + book.id}"><button>go to book</button></router-link>
+    <p>Log in</p>
+    <div v-if="currentUser !== {}"> <!-- bookshelf section-->
+      <!-- Not working for some reason -->
+      <div>Last Book</div>
+      <div v-for='shelf in bookshelves'>
+        <h3><router-link v-bind:to="{path: '/bookshelves/' + shelf.id}"> {{shelf.title}}</router-link></h3>
+        <p>{{shelf}} <button>add book</button></p>
+      </div>
+      <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
+      <button v-on:click="submitNewShelf">add new shelf</button>
     </div>
+  </div>
+</template>
+
+<template id="bookshelf-page">
+  <div class="container">
+  <h1>{{ message }}</h1>
+      <h3>{{bookshelf.title}}</h3>
+      <p>{{bookshelf}} <button>add book</button></p>
+    <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
+    <button v-on:click="submitNewShelf">add new shelf</button>
   </div>
 </template>
 
@@ -135,15 +152,5 @@
   </div>
 </template>
 
-<template id="bookshelf-page">
-  <div class="container">
-    <h1>{{ message }}</h1>
-    <div v-for='shelf in bookshelves'>
-      <h3>{{shelf.title}}</h3>
-      <p>{{shelf}} <button>add book</button></p>
-    </div>
-    <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
-    <button v-on:click="submitNewShelf">add new shelf</button>
-  </div>
-</template>
+
 

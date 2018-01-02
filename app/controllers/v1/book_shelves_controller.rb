@@ -1,7 +1,6 @@
 class V1::BookShelvesController < ApplicationController
   def index
-    book_shelves = BookShelf.where(user_id: params[:user_id])
-    p book_shelves
+    book_shelves = BookShelf.where(user_id: current_user.id)
     render json: book_shelves.as_json
   end
 
@@ -13,7 +12,7 @@ class V1::BookShelvesController < ApplicationController
   def create
     book_shelf = BookShelf.new
     book_shelf.title = params["title"]
-    book_shelf.user_id = params["user_id"]
+    book_shelf.user_id = current_user.id
     book_shelf.public = false
     if book_shelf.save
       render json: book_shelf.as_json

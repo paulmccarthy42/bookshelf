@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get "book_shelves/:id" => "book_shelves#show"
     post "/book_shelves" => "book_shelves#create"
 
+    get "current_user" => "users#check_current"
     post "/users" => "users#create"
 
     post "/book_selections" => "book_selections#create"

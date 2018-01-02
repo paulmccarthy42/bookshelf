@@ -5,17 +5,45 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to Mah Capstone!",
-      books: []
+      bookshelves: [],
+      submitNewName: "",
+      NewShelfName: "",
+      currentUser: {}
     };
   },
   created: function() {
-    axios.get("/v1/books").then(
-      function(response) {
-        this.books = response.data;
-      }.bind(this)
-    );
+    // refactor so book shelves and all other information are pulled upon confirmation of login
+    axios
+      .get("/v1/current_user")
+      .then(
+        function(response) {
+          this.currentUser = response.data;
+          axios.get("/v1/book_shelves").then(
+            function(response) {
+              this.bookshelves = response.data;
+              console.log(response.data);
+            }.bind(this)
+          );
+        }.bind(this)
+      )
+      .catch(
+        function(error) {
+          this.message = "Please log in";
+        }.bind(this)
+      );
   },
-  methods: {},
+  methods: {
+    submitNewShelf: function() {
+      console.log("Hello");
+      axios.post("v1/book_shelves", { title: this.NewShelfName }).then(
+        function(response) {
+          console.log(response.data);
+          this.bookshelves.push(response.data);
+          this.NewShelfName = "";
+        }.bind(this)
+      );
+    }
+  },
   computed: {}
 };
 
@@ -117,22 +145,18 @@ var BookShelfPage = {
   template: "#bookshelf-page",
   data: function() {
     return {
-      message: "Welcome to Your Bookshelves",
-      bookshelves: [],
+      message: "Welcome to Your Bookshelf",
+      bookshelf: [],
       NewShelfName: ""
     };
   },
   created: function() {
-    axios
-      .get("/v1/book_shelves", {
-        params: { user_id: 2 }
-      })
-      .then(
-        function(response) {
-          this.bookshelves = response.data;
-          console.log(response.data);
-        }.bind(this)
-      );
+    axios.get("/v1/book_shelves/" + this.$route.params.id).then(
+      function(response) {
+        this.bookshelf = response.data;
+        console.log(response.data);
+      }.bind(this)
+    );
   },
   methods: {
     submitNewShelf: function() {
@@ -223,7 +247,7 @@ var router = new VueRouter({
     { path: "/book/new", component: AddBookPage },
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
-    { path: "/my_bookshelves", component: BookShelfPage },
+    { path: "/bookshelves/:id", component: BookShelfPage },
     { path: "/sign_up", component: SignUpPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage }
