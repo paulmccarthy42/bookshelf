@@ -96,9 +96,11 @@
 <template id="read-page">
   <div class="container">
     <h1>Hello</h1>
-    <p>{{text}}</p>
-    <a v-if="pageNumber !== 1" v-bind:href="'#/books/' + bookId + '/read/'+ (pageNumber + 1)"><button>last</button></a>
-    <a v-bind:href="'#/books/' + bookId + '/read/' + (pageNumber + 1)"><button>next</button></a>
+    <div v-for="page in pages">
+      <p>{{page.text}}</p>
+      <p>{{page.page_number}}</p>
+    </div>
+    <a v-bind:href="'#/books/' + bookId + '/read/'"><button>next</button></a>
     <router-link v-bind:to="{path: '/'}"><button>back to home</button></router-link>
   </div>
 </template>

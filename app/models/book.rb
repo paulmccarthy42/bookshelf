@@ -18,7 +18,6 @@ class Book < ApplicationRecord
     end
   end
 
-  #refactor to return array of new, unsaved pages
   def generate_pages(gutenberg_id, book_id)
     page_list = []
     response = Unirest.get("https://gutenbergapi.org/texts/#{gutenberg_id}/body")

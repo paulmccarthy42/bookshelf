@@ -96,17 +96,16 @@ var BookReadPage = {
   template: "#read-page",
   data: function() {
     return {
-      text: "",
-      bookId: parseInt(this.$route.params.id),
-      pageNumber: parseInt(this.$route.params.page_number)
+      pages: [],
+      bookId: parseInt(this.$route.params.id)
     };
   },
   created: function() {
     console.log("hello");
     var params = {};
-    axios.get("/v1/books/" + this.bookId + "/read/" + this.pageNumber).then(
+    axios.get("/v1/books/" + this.bookId + "/read/").then(
       function(response) {
-        this.text = response.data.text;
+        this.pages = response.data;
       }.bind(this)
     );
   },
@@ -118,7 +117,7 @@ var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/book/new", component: AddBookPage },
-    { path: "/books/:id/read/:page_number", component: BookReadPage },
+    { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {

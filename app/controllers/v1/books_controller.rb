@@ -24,8 +24,8 @@ class V1::BooksController < ApplicationController
   end
 
   def read
-    page = Page.where(book_id: params[:id]).where(page_number: params[:page_number]).first
-    render json: page.as_json
+    pages = Page.where(book_id: params[:id])
+    render json: pages.as_json
   end
 
   def create
