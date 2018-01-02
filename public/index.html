@@ -70,7 +70,7 @@
   <div class="container">
     <h1>{{ message }}</h1>
     <p>{{info}}</p>
-    <a v-bind:href="'#/books/' + info.id + '/read/1'"><button>read</button></a>
+    <a v-bind:href="'#/books/' + info.id + '/read/'"><button>read</button></a>
     <router-link v-bind:to="{path: '/'}"><button>back</button></router-link>
   </div>
 </template>
@@ -102,5 +102,17 @@
     </div>
     <a v-bind:href="'#/books/' + bookId + '/read/'"><button>next</button></a>
     <router-link v-bind:to="{path: '/'}"><button>back to home</button></router-link>
+  </div>
+</template>
+
+<template id="bookshelf-page">
+  <div class="container">
+    <h1>{{ message }}</h1>
+    <div v-for='shelf in bookshelves'>
+      <h3>{{shelf.title}}</h3>
+      <p>{{shelf}} <button>add book</button></p>
+    </div>
+    <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
+    <button v-on:click="submitNewShelf">add new shelf</button>
   </div>
 </template>

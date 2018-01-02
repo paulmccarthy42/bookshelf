@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'user_token' => 'user_token#create'
   namespace :v1 do
     get "/pages" => "pages#index"
     post "/pages" => "pages#create"
@@ -11,8 +12,12 @@ Rails.application.routes.draw do
     get "/books/:id" => "books#show"
     post "/books" => "books#create"
 
-    post "/book_selections" => "book_selections#create"
-
+    get "book_shelves/" => "book_shelves#index"
     get "book_shelves/:id" => "book_shelves#show"
+    post "/book_shelves" => "book_shelves#create"
+
+    post "/users" => "user#create"
+
+    post "/book_selections" => "book_selections#create"
   end
 end

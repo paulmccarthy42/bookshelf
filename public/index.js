@@ -113,12 +113,51 @@ var BookReadPage = {
   computed: {}
 };
 
+var BookShelfPage = {
+  template: "#bookshelf-page",
+  data: function() {
+    return {
+      message: "Welcome to Your Bookshelves",
+      bookshelves: [],
+      NewShelfName: ""
+    };
+  },
+  created: function() {
+    axios
+      .get("/v1/book_shelves", {
+        params: { user_id: 2 }
+      })
+      .then(
+        function(response) {
+          this.bookshelves = response.data;
+          console.log(response.data);
+        }.bind(this)
+      );
+  },
+  methods: {
+    submitNewShelf: function() {
+      console.log("Hello");
+      axios
+        .post("v1/book_shelves", { user_id: 2, title: this.NewShelfName })
+        .then(
+          function(response) {
+            console.log(response.data);
+            this.bookshelves.push(response.data);
+            this.NewShelfName = "";
+          }.bind(this)
+        );
+    }
+  },
+  computed: {}
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/book/new", component: AddBookPage },
     { path: "/books/:id/read", component: BookReadPage },
-    { path: "/book/:id", component: BookSummaryPage }
+    { path: "/book/:id", component: BookSummaryPage },
+    { path: "/my_bookshelves", component: BookShelfPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
