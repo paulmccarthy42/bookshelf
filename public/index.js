@@ -92,26 +92,33 @@ var AddBookPage = {
   computed: {}
 };
 
-// var BookReadPage = {
-//   template: "#read-page",
-//   data: function() {
-//     return {
-//       text: ""
-//     };
-//   },
-//   created: function() {
-//     var params = {};
-//     axios.get("/v1/pages/" + this.$route.params.id + "/read");
-//   },
-//   methods: {},
-//   computed: {}
-// };
+var BookReadPage = {
+  template: "#read-page",
+  data: function() {
+    return {
+      text: "",
+      bookId: parseInt(this.$route.params.id),
+      pageNumber: parseInt(this.$route.params.page_number)
+    };
+  },
+  created: function() {
+    console.log("hello");
+    var params = {};
+    axios.get("/v1/books/" + this.bookId + "/read/" + this.pageNumber).then(
+      function(response) {
+        this.text = response.data.text;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
 
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
-    // { path: "/book/:id/read/:page_number", component: BookReadPage },
     { path: "/book/new", component: AddBookPage },
+    { path: "/books/:id/read/:page_number", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {

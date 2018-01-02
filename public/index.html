@@ -70,7 +70,7 @@
   <div class="container">
     <h1>{{ message }}</h1>
     <p>{{info}}</p>
-    <a v-bind:href="'v1/books/' + info.id + '/read'"><button>read</button></a>
+    <a v-bind:href="'#/books/' + info.id + '/read/1'"><button>read</button></a>
     <router-link v-bind:to="{path: '/'}"><button>back</button></router-link>
   </div>
 </template>
@@ -90,5 +90,15 @@
       <button v-on:click="submitNewBook">Submit</button>
       <button v-on:click="toggleSearching">Back</button>
     </div>
+  </div>
+</template>
+
+<template id="read-page">
+  <div class="container">
+    <h1>Hello</h1>
+    <p>{{text}}</p>
+    <a v-if="pageNumber !== 1" v-bind:href="'#/books/' + bookId + '/read/'+ (pageNumber + 1)"><button>last</button></a>
+    <a v-bind:href="'#/books/' + bookId + '/read/' + (pageNumber + 1)"><button>next</button></a>
+    <router-link v-bind:to="{path: '/'}"><button>back to home</button></router-link>
   </div>
 </template>

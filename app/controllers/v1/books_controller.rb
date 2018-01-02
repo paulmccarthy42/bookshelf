@@ -23,6 +23,11 @@ class V1::BooksController < ApplicationController
     end
   end
 
+  def read
+    page = Page.where(book_id: params[:id]).where(page_number: params[:page_number]).first
+    render json: page.as_json
+  end
+
   def create
     book = Book.new
     book.title = params["title"]
@@ -34,6 +39,7 @@ class V1::BooksController < ApplicationController
     if book.save
       pages = book.generate_pages(book.gutenberg_id, book.id)
       if pages.all? {|page| page.save}
+        #move to error reporting
         render json: "success baby"
       else
         render json: "error creating pages"
