@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get "book_shelves/:id" => "book_shelves#show"
     post "/book_shelves" => "book_shelves#create"
 
-    post "/users" => "user#create"
+    post "/users" => "users#create"
 
     post "/book_selections" => "book_selections#create"
   end

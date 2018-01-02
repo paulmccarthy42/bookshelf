@@ -34,13 +34,13 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+              Account Options
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#/login">Log In</a>
+              <a class="dropdown-item" href="#/logout">Log Out</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#/sign_up">Sign Up New User</a>
             </div>
           </li>
         </ul>
@@ -55,6 +55,36 @@
 </body>
 </html>
 
+<!-- User pages -->
+<template id="signup-page">
+  <div class="container">
+    <h1>{{ message }}</h1>
+    <div><input type="text" placeholder="Enter your User Name" v-model="newUser.name"></div>
+    <div><input type="text" placeholder="Enter your Email Address" v-model="newUser.email"></div>
+    <div><input type="password" placeholder="Enter your Password" v-model="newUser.password"></div>
+    <div><input type="password" placeholder="Confirm your Password" v-model="newUser.password_confirmation"></div>
+    <button v-on:click="signup">submit</button>
+  </div>
+</template>
+
+<template id="login-page">
+  <div class="container">
+    <h1>Login</h1>
+    <ul>
+      <li class="text-danger" v-for="error in errors">{{ error }}</li>
+    </ul>
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" class="form-control" v-model="email">
+    </div>
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" class="form-control" v-model="password">
+    </div>
+    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+  </div>
+</template>
+<!-- Home Page with login screen, last book read, bookshelves, and recent notes -->
 <template id="home-page">
   <div class="container">
     <h1>{{ message }}</h1>
@@ -116,3 +146,4 @@
     <button v-on:click="submitNewShelf">add new shelf</button>
   </div>
 </template>
+
