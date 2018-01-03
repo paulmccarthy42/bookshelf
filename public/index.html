@@ -131,6 +131,7 @@
     <div v-for="book in booksOnfile">
       <p>{{book}}</p>
       <button>add</button>
+      <!-- Build above out so that it shelves book, below so that it creates and shelves simultaneously -->
     </div>
     <div v-if="searching">
       <p>Please give me the Gutenberg ID of the book you want to add</p>
