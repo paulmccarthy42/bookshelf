@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get "current_user" => "users#check_current"
     post "/users" => "users#create"
 
+    get "book_selections/" => "book_selections#index"
     post "/book_selections" => "book_selections#create"
   end
 end

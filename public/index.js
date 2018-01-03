@@ -4,7 +4,7 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Welcome to Mah Capstone!",
+      message: "Welcome, ",
       bookshelves: [],
       submitNewName: "",
       NewShelfName: "",
@@ -18,6 +18,8 @@ var HomePage = {
       .then(
         function(response) {
           this.currentUser = response.data;
+          this.message += this.currentUser.name;
+          console.log(this.currentUser);
           axios.get("/v1/book_shelves").then(
             function(response) {
               this.bookshelves = response.data;
@@ -35,13 +37,22 @@ var HomePage = {
   methods: {
     submitNewShelf: function() {
       console.log("Hello");
-      axios.post("v1/book_shelves", { title: this.NewShelfName }).then(
-        function(response) {
-          console.log(response.data);
-          this.bookshelves.push(response.data);
-          this.NewShelfName = "";
-        }.bind(this)
-      );
+      axios
+        .post("v1/book_shelves", { title: this.NewShelfName })
+        .then(
+          function(response) {
+            console.log(response.data);
+            this.bookshelves.push(response.data);
+            this.NewShelfName = "";
+          }.bind(this)
+        )
+        .catch(function(error) {
+          console.log();
+        })
+        .catch(function(error) {
+          console.log("BOOM");
+          console.log(error.response.data.errors);
+        });
     }
   },
   computed: {}
@@ -71,11 +82,18 @@ var AddBookPage = {
   data: function() {
     return {
       searching: true,
+      booksOnfile: [],
       bookInfo: {},
       errors: []
     };
   },
-  created: function() {},
+  created: function() {
+    axios.get("v1/books").then(
+      function(response) {
+        this.booksOnfile = response.data;
+      }.bind(this)
+    );
+  },
   methods: {
     searchGutenberg: function() {
       // check and see if already found
@@ -145,7 +163,7 @@ var BookShelfPage = {
   template: "#bookshelf-page",
   data: function() {
     return {
-      message: "Welcome to Your Bookshelf",
+      message: "Welcome",
       bookshelf: [],
       NewShelfName: ""
     };
@@ -158,20 +176,7 @@ var BookShelfPage = {
       }.bind(this)
     );
   },
-  methods: {
-    submitNewShelf: function() {
-      console.log("Hello");
-      axios
-        .post("v1/book_shelves", { user_id: 2, title: this.NewShelfName })
-        .then(
-          function(response) {
-            console.log(response.data);
-            this.bookshelves.push(response.data);
-            this.NewShelfName = "";
-          }.bind(this)
-        );
-    }
-  },
+  methods: {},
   computed: {}
 };
 
@@ -244,7 +249,7 @@ var LogoutPage = {
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
-    { path: "/book/new", component: AddBookPage },
+    { path: "/book/new/:book_shelf_id", component: AddBookPage },
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
     { path: "/bookshelves/:id", component: BookShelfPage },

@@ -30,7 +30,6 @@
             <a class="nav-link" href="/#/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/book/new">Add New Book</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,13 +88,16 @@
 <template id="home-page">
   <div class="container">
     <h1>{{ message }}</h1>
-    <p>Log in</p>
-    <div v-if="currentUser !== {}"> <!-- bookshelf section-->
+    <div v-if="message === 'Please log in'">
+      <a class="btn btn-success" href="#/login">Log In</a>
+      <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
+    </div>
+    <div v-if="message !== 'Please log in'"> <!-- bookshelf section-->
       <!-- Not working for some reason -->
       <div>Last Book</div>
       <div v-for='shelf in bookshelves'>
         <h3><router-link v-bind:to="{path: '/bookshelves/' + shelf.id}"> {{shelf.title}}</router-link></h3>
-        <p>{{shelf}} <button>add book</button></p>
+        <p>{{shelf}} </p><router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + shelf.id}">add book</router-link>
       </div>
       <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
       <button v-on:click="submitNewShelf">add new shelf</button>
@@ -103,16 +105,17 @@
   </div>
 </template>
 
+<!-- Close up for specific bookshelf, maybe can be transitioned to a modal -->
 <template id="bookshelf-page">
   <div class="container">
   <h1>{{ message }}</h1>
       <h3>{{bookshelf.title}}</h3>
       <p>{{bookshelf}} <button>add book</button></p>
-    <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
-    <button v-on:click="submitNewShelf">add new shelf</button>
+      <a class="btn btn-outline-success" href="#/">Back</a>
   </div>
 </template>
 
+<!-- Close up for a book -->
 <template id="book-page">
   <div class="container">
     <h1>{{ message }}</h1>
@@ -122,8 +125,13 @@
   </div>
 </template>
 
+<!-- basically the search function/ -->
 <template id="add-book-page">
   <div>
+    <div v-for="book in booksOnfile">
+      <p>{{book}}</p>
+      <button>add</button>
+    </div>
     <div v-if="searching">
       <p>Please give me the Gutenberg ID of the book you want to add</p>
       <input type="number" v-model="bookInfo.gutenberg_id">  
