@@ -151,6 +151,45 @@ var AddBookPage = {
   computed: {}
 };
 
+var SearchBookPage = {
+  template: "#search-book-page",
+  data: function() {
+    return {
+      searching: true,
+      booksOnfile: [],
+      bookInfo: {},
+      errors: []
+    };
+  },
+  created: function() {
+    var url = "v1/books/search?title=" + this.$route.query.title;
+    console.log(url);
+    axios.get(url).then(
+      function(response) {
+        console.log(response);
+        this.booksOnfile = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {
+    shelveABook: function(bookId) {
+      axios
+        .post("/v1/book_selections", {
+          book_id: bookId,
+          book_shelf_id: this.$route.params.book_shelf_id
+        })
+        .then(function(response) {
+          router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.errors);
+        });
+    }
+    // second method pushing gberg data to database and calling page controllers
+  },
+  computed: {}
+};
+
 var BookReadPage = {
   template: "#read-page",
   data: function() {
@@ -262,7 +301,7 @@ var LogoutPage = {
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
-    { path: "/book/search/", component: AddBookPage },
+    { path: "/book/search/", component: SearchBookPage },
     { path: "/book/new/:book_shelf_id", component: AddBookPage },
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
@@ -285,7 +324,15 @@ var app = new Vue({
       axios.defaults.headers.common["Authorization"] = jwt;
     }
   },
+  data: function() {
+    return {
+      searchTerm: ""
+    };
+  },
   methods: {
-    search: function() {}
+    search: function() {
+      router.push("/book/search?title=" + this.searchTerm);
+      this.searchTerm = "";
+    }
   }
 });
