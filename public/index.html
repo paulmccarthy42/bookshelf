@@ -142,7 +142,7 @@
       <button v-on:click="shelveABook(book.id)">add</button>
       <!-- Build above out so that it shelves book, below so that it creates and shelves simultaneously -->
     </div>
-    <div v-if="searching">
+    <!-- <div v-if="searching">
       <p>Please give me the Gutenberg ID of the book you want to add</p>
       <input type="number" v-model="bookInfo.gutenberg_id">  
       <button v-on:click = "searchGutenberg">search</button>
@@ -154,7 +154,7 @@
       <div>Year Published: <input class = "new" type="number" v-model="bookInfo.published_year"></div>
       <button v-on:click="submitNewBook">Submit</button>
       <button v-on:click="toggleSearching">Back</button>
-    </div>
+    </div> -->
   </div>
 </template>
 

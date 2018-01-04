@@ -81,9 +81,7 @@ var AddBookPage = {
   template: "#add-book-page",
   data: function() {
     return {
-      searching: true,
       booksOnfile: [],
-      bookInfo: {},
       errors: []
     };
   },
@@ -95,8 +93,48 @@ var AddBookPage = {
     );
   },
   methods: {
+    shelveABook: function(bookId) {
+      axios
+        .post("/v1/book_selections", {
+          book_id: bookId,
+          book_shelf_id: this.$route.params.book_shelf_id
+        })
+        .then(function(response) {
+          router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.errors);
+        });
+    }
+    // second method pushing gberg data to database and calling page controllers
+  },
+  computed: {}
+};
+
+var SearchBookPage = {
+  template: "#search-book-page",
+  data: function() {
+    return {
+      searching: true,
+      booksOnfile: [],
+      bookInfo: {},
+      errors: []
+    };
+  },
+  created: function() {
+    var url = "v1/books/search?title=" + this.$route.query.title;
+    console.log(url);
+    axios.get(url).then(
+      function(response) {
+        console.log(response);
+        this.booksOnfile = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {
     searchGutenberg: function() {
       // check and see if already found
+      console.log("test");
       axios
         .get("https://gutenbergapi.org/texts/" + this.bookInfo.gutenberg_id) //breaks if you use jwt in header
         .then(
@@ -151,45 +189,6 @@ var AddBookPage = {
   computed: {}
 };
 
-var SearchBookPage = {
-  template: "#search-book-page",
-  data: function() {
-    return {
-      searching: true,
-      booksOnfile: [],
-      bookInfo: {},
-      errors: []
-    };
-  },
-  created: function() {
-    var url = "v1/books/search?title=" + this.$route.query.title;
-    console.log(url);
-    axios.get(url).then(
-      function(response) {
-        console.log(response);
-        this.booksOnfile = response.data;
-      }.bind(this)
-    );
-  },
-  methods: {
-    shelveABook: function(bookId) {
-      axios
-        .post("/v1/book_selections", {
-          book_id: bookId,
-          book_shelf_id: this.$route.params.book_shelf_id
-        })
-        .then(function(response) {
-          router.push("/");
-        })
-        .catch(function(error) {
-          console.log(error.response.data.errors);
-        });
-    }
-    // second method pushing gberg data to database and calling page controllers
-  },
-  computed: {}
-};
-
 var BookReadPage = {
   template: "#read-page",
   data: function() {
@@ -203,6 +202,7 @@ var BookReadPage = {
     var params = {};
     axios.get("/v1/books/" + this.bookId + "/read/").then(
       function(response) {
+        console.log(response.data);
         this.pages = response.data;
       }.bind(this)
     );
