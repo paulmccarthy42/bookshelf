@@ -124,23 +124,27 @@
   </div>
 </template>
 
-<!-- Close up for a book -->
+<!-- Summary for a book -->
 <template id="book-page">
   <div class="container">
     <h1>{{ message }}</h1>
     <p>{{info}}</p>
     <a v-bind:href="'#/books/' + info.id + '/read/'"><button>read</button></a>
-    <router-link v-bind:to="{path: '/'}"><button>back</button></router-link>
+    <datalist id=titles>
+      <option v-for="shelf in bookshelves">{{shelf.title}}</option>
+    </datalist>
+    <input type="text" placeholder="Search by title" v-model="selectedShelf" list="titles">
+    <button v-on:click="shelfName">add to shelf</button>
+    <div><router-link v-bind:to="{path: '/'}"><button>back</button></router-link></div>
   </div>
 </template>
 
-<!-- basically the search function/ -->
+<!-- Probably becomes a modal on the home page-->
 <template id="add-book-page">
   <div>
     <div v-for="book in booksOnfile">
       <p><strong>{{book.title}}</strong> by {{book.author}}</p>
       <button v-on:click="shelveABook(book.id)">add</button>
-      <!-- Build above out so that it shelves book, below so that it creates and shelves simultaneously -->
     </div>
   </div>
 </template>

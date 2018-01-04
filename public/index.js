@@ -63,7 +63,10 @@ var BookSummaryPage = {
   data: function() {
     return {
       message: "Welcome to Book #" + this.$route.params.id,
-      info: {}
+      info: {},
+      bookshelves: [],
+      currentUser: {},
+      selectedShelf: ""
     };
   },
   created: function() {
@@ -72,6 +75,27 @@ var BookSummaryPage = {
         this.info = response.data;
       }.bind(this)
     );
+
+    axios
+      .get("/v1/current_user")
+      .then(
+        function(response) {
+          this.currentUser = response.data;
+          this.message += this.currentUser.name;
+          console.log(this.currentUser);
+          axios.get("/v1/book_shelves").then(
+            function(response) {
+              this.bookshelves = response.data;
+              console.log(response.data);
+            }.bind(this)
+          );
+        }.bind(this)
+      )
+      .catch(
+        function(error) {
+          this.message = "Please log in";
+        }.bind(this)
+      );
   },
   methods: {
     shelveABook: function(bookId) {
@@ -86,6 +110,9 @@ var BookSummaryPage = {
         .catch(function(error) {
           console.log(error.response.data.errors);
         });
+    },
+    shelfName: function() {
+      console.log(this.selectedShelf);
     }
   },
   computed: {}
