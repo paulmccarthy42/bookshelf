@@ -101,8 +101,8 @@ var BookSummaryPage = {
     shelveABook: function(bookId) {
       axios
         .post("/v1/book_selections", {
-          book_id: bookId,
-          book_shelf_id: this.$route.params.book_shelf_id
+          book_id: this.$route.params.id,
+          book_shelf_title: this.selectedShelf
         })
         .then(function(response) {
           router.push("/");
@@ -110,9 +110,6 @@ var BookSummaryPage = {
         .catch(function(error) {
           console.log(error.response.data.errors);
         });
-    },
-    shelfName: function() {
-      console.log(this.selectedShelf);
     }
   },
   computed: {}

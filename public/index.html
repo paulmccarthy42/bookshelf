@@ -134,7 +134,7 @@
       <option v-for="shelf in bookshelves">{{shelf.title}}</option>
     </datalist>
     <input type="text" placeholder="Search by title" v-model="selectedShelf" list="titles">
-    <button v-on:click="shelfName">add to shelf</button>
+    <button v-on:click="shelveABook">add to shelf</button>
     <div><router-link v-bind:to="{path: '/'}"><button>back</button></router-link></div>
   </div>
 </template>
