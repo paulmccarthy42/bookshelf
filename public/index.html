@@ -138,7 +138,7 @@
 <template id="add-book-page">
   <div>
     <div v-for="book in booksOnfile">
-      <p>{{book}}</p>
+      <p><strong>{{book.title}}</strong> by {{book.author}}</p>
       <button v-on:click="shelveABook(book.id)">add</button>
       <!-- Build above out so that it shelves book, below so that it creates and shelves simultaneously -->
     </div>

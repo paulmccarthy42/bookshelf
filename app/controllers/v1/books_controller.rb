@@ -49,4 +49,15 @@ class V1::BooksController < ApplicationController
       render json: "error creating book"
     end
   end
+
+  def search
+    books = []
+    Book.all.each do |book|
+      books << book if (book.title.downcase).include?(params[:title].downcase)
+    end
+    render json: books.as_json
+  end
 end
+
+
+

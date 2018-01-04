@@ -262,6 +262,7 @@ var LogoutPage = {
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
+    { path: "/book/search/", component: AddBookPage },
     { path: "/book/new/:book_shelf_id", component: AddBookPage },
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
@@ -283,5 +284,8 @@ var app = new Vue({
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
+  },
+  methods: {
+    search: function() {}
   }
 });

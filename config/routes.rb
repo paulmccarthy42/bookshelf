@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     get "/books" => "books#index"
     get "books/check" => "books#check"
+    get "books/search" => "books#search"
     get "books/:id/read" => "books#read"
     get "/books/:id" => "books#show"
     post "/books" => "books#create"

@@ -1,3 +1,7 @@
 .new {
   display: flex;
 }
+
+.title {
+  font-weight: bold;
+}
