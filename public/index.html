@@ -142,19 +142,6 @@
       <button v-on:click="shelveABook(book.id)">add</button>
       <!-- Build above out so that it shelves book, below so that it creates and shelves simultaneously -->
     </div>
-    <!-- <div v-if="searching">
-      <p>Please give me the Gutenberg ID of the book you want to add</p>
-      <input type="number" v-model="bookInfo.gutenberg_id">  
-      <button v-on:click = "searchGutenberg">search</button>
-    </div>
-    <div v-if="!searching">
-      <div>Title: <input class = "new" type="text" v-model="bookInfo.title"></div>
-      <div>Author: <input class = "new" type="text" v-model="bookInfo.author"></div>
-      <div>Genre: <input class = "new" type="text" v-model="bookInfo.genre"></div>
-      <div>Year Published: <input class = "new" type="number" v-model="bookInfo.published_year"></div>
-      <button v-on:click="submitNewBook">Submit</button>
-      <button v-on:click="toggleSearching">Back</button>
-    </div> -->
   </div>
 </template>
 
@@ -162,6 +149,20 @@
   <div>
     <h2>Search Results:</h2>
     <p v-for="book in booksOnfile"><router-link v-bind:to="{ path: '/book/' + book.id}">{{book.title}}</router-link></p>
+    <h3>Didn't find what you were looking for? Take a look on Project Gutenberg</h3>
+    <div v-if="searching">
+      <p>Please give me the Gutenberg ID of the book you want to add</p>
+      <input type="number" v-model="bookInfo.gutenberg_id">  
+      <button v-on:click = "searchGutenberg">search</button>
+    </div>
+  <div v-if="!searching">
+    <div>Title: <input class = "new" type="text" v-model="bookInfo.title"></div>
+    <div>Author: <input class = "new" type="text" v-model="bookInfo.author"></div>
+    <div>Genre: <input class = "new" type="text" v-model="bookInfo.genre"></div>
+    <div>Year Published: <input class = "new" type="number" v-model="bookInfo.published_year"></div>
+    <button v-on:click="submitNewBook">Submit</button>
+    <button v-on:click="toggleSearching">Back</button>
+  </div>
   </div>
 </template>
 

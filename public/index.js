@@ -78,6 +78,7 @@ var BookSummaryPage = {
 };
 
 var AddBookPage = {
+  //probably makes more sense as a modal on home page
   template: "#add-book-page",
   data: function() {
     return {
@@ -106,7 +107,6 @@ var AddBookPage = {
           console.log(error.response.data.errors);
         });
     }
-    // second method pushing gberg data to database and calling page controllers
   },
   computed: {}
 };
