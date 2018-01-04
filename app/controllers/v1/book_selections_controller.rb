@@ -8,10 +8,12 @@ class V1::BookSelectionsController < ApplicationController
     selection = BookSelection.new
     selection.book_id = params["book_id"]
     selection.book_shelf_id = params["book_shelf_id"]
+    selection.bookmarked_page_id = 0
     if selection.save
-      render json: "successfully added"
+      render json: selection.as_json
     else
-      render json: "failboat"
+      render json: {errors: selection.errors.full_messages}, status: :bad_request
+      
     end
   end
 end

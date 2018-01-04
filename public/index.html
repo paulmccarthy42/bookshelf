@@ -95,12 +95,18 @@
     <div v-if="message !== 'Please log in'"> <!-- bookshelf section-->
       <!-- Not working for some reason -->
       <div>Last Book</div>
+      <p>______________________________________</p>
+
       <div v-for='shelf in bookshelves'>
         <h3><router-link v-bind:to="{path: '/bookshelves/' + shelf.id}"> {{shelf.title}}</router-link></h3>
-        <p>{{shelf}} </p><router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + shelf.id}">add book</router-link>
+        <div v-for="book in shelf.books"><router-link v-bind:to="{path: '/book/' + book.id}">{{book.title}} </router-link></div>
+
+        <router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + shelf.id}">add book</router-link>
       </div>
       <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
       <button v-on:click="submitNewShelf">add new shelf</button>
+      <p>______________________________________</p>
+      <p>last notes</p>
     </div>
   </div>
 </template>
@@ -108,9 +114,12 @@
 <!-- Close up for specific bookshelf, maybe can be transitioned to a modal -->
 <template id="bookshelf-page">
   <div class="container">
-  <h1>{{ message }}</h1>
+    <div>
       <h3>{{bookshelf.title}}</h3>
-      <p>{{bookshelf}} <button>add book</button></p>
+        <div v-for="book in bookshelf.books"><router-link v-bind:to="{path: '/book/' + book.id}">{{book.title}} </router-link></div>
+
+        <router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + bookshelf.id}">add book</router-link>
+      </div>
       <a class="btn btn-outline-success" href="#/">Back</a>
   </div>
 </template>
@@ -130,7 +139,7 @@
   <div>
     <div v-for="book in booksOnfile">
       <p>{{book}}</p>
-      <button>add</button>
+      <button v-on:click="shelveABook(book.id)">add</button>
       <!-- Build above out so that it shelves book, below so that it creates and shelves simultaneously -->
     </div>
     <div v-if="searching">
@@ -156,7 +165,6 @@
       <p>{{page.text}}</p>
       <p>{{page.page_number}}</p>
     </div>
-    <a v-bind:href="'#/books/' + bookId + '/read/'"><button>next</button></a>
     <router-link v-bind:to="{path: '/'}"><button>back to home</button></router-link>
   </div>
 </template>

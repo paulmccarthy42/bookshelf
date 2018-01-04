@@ -98,7 +98,7 @@ var AddBookPage = {
     searchGutenberg: function() {
       // check and see if already found
       axios
-        .get("https://gutenbergapi.org/texts/" + this.bookInfo.gutenberg_id)
+        .get("https://gutenbergapi.org/texts/" + this.bookInfo.gutenberg_id) //breaks if you use jwt in header
         .then(
           function(response) {
             this.bookInfo.title = response.data.metadata.title[0];
@@ -132,6 +132,19 @@ var AddBookPage = {
           router.push("/");
         }.bind(this)
       );
+    },
+    shelveABook: function(bookId) {
+      axios
+        .post("/v1/book_selections", {
+          book_id: bookId,
+          book_shelf_id: this.$route.params.book_shelf_id
+        })
+        .then(function(response) {
+          router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.errors);
+        });
     }
     // second method pushing gberg data to database and calling page controllers
   },
