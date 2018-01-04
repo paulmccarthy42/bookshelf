@@ -73,7 +73,21 @@ var BookSummaryPage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    shelveABook: function(bookId) {
+      axios
+        .post("/v1/book_selections", {
+          book_id: bookId,
+          book_shelf_id: this.$route.params.book_shelf_id
+        })
+        .then(function(response) {
+          router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.errors);
+        });
+    }
+  },
   computed: {}
 };
 
@@ -170,19 +184,6 @@ var SearchBookPage = {
           router.push("/");
         }.bind(this)
       );
-    },
-    shelveABook: function(bookId) {
-      axios
-        .post("/v1/book_selections", {
-          book_id: bookId,
-          book_shelf_id: this.$route.params.book_shelf_id
-        })
-        .then(function(response) {
-          router.push("/");
-        })
-        .catch(function(error) {
-          console.log(error.response.data.errors);
-        });
     }
     // second method pushing gberg data to database and calling page controllers
   },
