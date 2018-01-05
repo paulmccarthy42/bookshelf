@@ -44,6 +44,36 @@ class Book < ApplicationRecord
     return page_list
   end
 
+  def generate_pages_line_by_line(gutenberg_id, book_id)
+    response = Unirest.get("https://gutenbergapi.org/texts/#{gutenberg_id}/body").body["body"]
+    lines = []
+    response.each_line {|line| lines << line}
+    # generate a page
+    # save it
+    # generate 40 lines tied to that page
+    # save them
+    page_number = 1
+    pages = lines.length / 40 + 1
+    # pages.times do
+    page = Page.new(
+      book_id: book_id,
+      page_number: page_number
+    )
+    page.save
+    40.times do
+      line = Line.new(
+        page_id: page.id,
+        line_number: lines.index(line) + 1,
+        text: line
+        )
+      line.save
+      
+    end
+    page_number += 1
+  # end
+
+  end
+
   def as_json
     {
       id: id,
