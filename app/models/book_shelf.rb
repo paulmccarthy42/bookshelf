@@ -9,7 +9,7 @@ class BookShelf < ApplicationRecord
   def as_json
     {
     id: id,
-    user: User.find_by(id: user_id).name,
+    user: user.name,
     title: title,
     books: books.as_json
     }

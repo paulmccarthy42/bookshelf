@@ -136,6 +136,10 @@
     <input type="text" placeholder="Search by title" v-model="selectedShelf" list="titles">
     <button v-on:click="shelveABook">add to shelf</button>
     <div><router-link v-bind:to="{path: '/'}"><button>back</button></router-link></div>
+    <div v-for="comment in info.comments">
+      <p>{{comment.comment_text}} by {{comment.author}}</p>
+      <p>{{comment}}</p>
+    </div>
   </div>
 </template>
 

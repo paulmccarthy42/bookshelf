@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   has_many :book_selections
   has_many :book_shelves, through: :book_selections
+  has_many :comments, as: :commentable
 
   def pages
     Page.all.where(book_id: id).sort{|page1, page2| page1.page_number <=> page2.page_number}
@@ -83,7 +84,7 @@ class Book < ApplicationRecord
       language: language,
       published_year: published_year,
       pages: pages.length,
-      first_page: pages[0].id
+      comments: comments.as_json
     }
   end
 end

@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
   belongs_to :book
   has_many :lines
-  belongs_to
+  has_many :comments
 
   def display
     pretty_page = ""
