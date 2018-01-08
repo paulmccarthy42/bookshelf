@@ -88,3 +88,4 @@ class Book < ApplicationRecord
     }
   end
 end
+
