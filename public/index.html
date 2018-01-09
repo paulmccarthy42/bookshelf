@@ -80,55 +80,63 @@
     </header>
     <router-view></router-view>
   </div>
-  <script>
-      jQuery(document).ready(function($){
-      //if you change this breakpoint in the style.css file (or _layout.scss if you use SASS), don't forget to update this value as well
-      var MQL = 1170;
 
-      //primary navigation slide-in effect
-      if($(window).width() > MQL) {
-        var headerHeight = $('.box-header').height();
-        $(window).on('scroll',
-        {
-              previousTop: 0
-          }, 
-          function () {
-            var currentTop = $(window).scrollTop();
-            //check if user is scrolling up
-            if (currentTop < this.previousTop ) {
-              //if scrolling up...
-              if (currentTop > 0 && $('.box-header').hasClass('is-fixed')) {
-                $('.box-header').addClass('is-visible');
-              } else {
-                $('.box-header').removeClass('is-visible is-fixed');
-              }
-            } else {
-              //if scrolling down...
-              $('.box-header').removeClass('is-visible');
-              if( currentTop > headerHeight && !$('.box-header').hasClass('is-fixed')) $('.box-header').addClass('is-fixed');
-            }
-            this.previousTop = currentTop;
+  <!-- Javascripting -->
+  <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript" src="assets/js/animated-headline.js"></script>
+  <script type="text/javascript" src="assets/js/menu.js"></script>
+  <script type="text/javascript" src="assets/js/modernizr.js"></script>
+  <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.flexslider-min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.animsition.min.js"></script>
+  <script type="text/javascript" src="assets/js/init.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/smooth-scroll.js"></script>
+  <script type="text/javascript" src="assets/js/numscroller.js"></script>
+  <script type="text/javascript" src="assets/js/wow.min.js"></script>
+  <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+
+  <script type="text/javascript">
+    $(window).load(function() {
+      new WOW().init();
+
+      // initialise flexslider
+      $('.flexslider').flexslider({
+        animation: "fade",
+        directionNav: true,
+        controlNav: false,
+        keyboardNav: true,
+        slideToStart: 0,
+        animationLoop: true,
+        pauseOnHover: false,
+        slideshowSpeed: 4000,
+      });
+
+      smoothScroll.init();
+
+      // initialize isotope
+      var $container = $('.portfolio_container');
+      $container.isotope({
+        filter: '*',
+      });
+
+      $('.portfolio_filter a').click(function(){
+        $('.portfolio_filter .active').removeClass('active');
+        $(this).addClass('active');
+
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+          filter: selector,
+          animationOptions: {
+            duration: 500,
+            animationEngine : "jquery"
+          }
         });
-      }
-
-      //open/close primary navigation
-      $('.box-primary-nav-trigger').on('click', function(){
-        $('.box-menu-icon').toggleClass('is-clicked'); 
-        $('.box-header').toggleClass('menu-is-open');
-        
-        //in firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
-        if( $('.box-primary-nav').hasClass('is-visible') ) {
-          $('.box-primary-nav').removeClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',function(){
-            $('body').removeClass('overflow-hidden');
-          });
-        } else {
-          $('.box-primary-nav').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',function(){
-            $('body').addClass('overflow-hidden');
-          }); 
-        }
+        return false;
       });
     });
   </script>
+
 </body>
 </html>
 
@@ -184,7 +192,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-6 right col-full right-0">
             <i class="lnr lnr-rocket"></i>
             <h6>unlimited options</h6>
@@ -215,7 +223,7 @@
               <br>Donec urna ante, lobortis nec dictum eget, porta non turpis.
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -226,7 +234,7 @@
           <div class="row center">
             <div class="section-title mb-100">
               <div class="process-numbers">03</div>
-              <h2>portfolio</h2>
+              <h2>Manage Bookshelves</h2>
               <p class="module-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
@@ -238,12 +246,12 @@
             <nav class="categories">
               <ul class="portfolio_filter">
                 <li><a href="" class="active" data-filter="*">all</a></li>
-                <li><a href="" data-filter=".photography">photography</a></li>
-                <li><a href="" data-filter=".web">webdesign</a></li>
-                <li><a href="" data-filter=".logo">logo</a></li>
-                <li><a href="" data-filter=".graphics">graphics</a></li>
-                <li><a href="" data-filter=".ads">advertising</a></li>
-                <li><a href="" data-filter=".fashion">fashion</a></li>
+                <li><a href="" data-filter=".photography">Bookshelf 1</a></li>
+                <li><a href="" data-filter=".web">Bookshelf 2</a></li>
+                <li><a href="" data-filter=".logo">You get the idea</a></li>
+                <li><a href="" data-filter=".graphics">Why am I</a></li>
+                <li><a href="" data-filter=".ads">Still doing these</a></li>
+                <li><a href="" data-filter=".fashion">New Bookshelf</a></li>
               </ul>
             </nav>
           </div>
