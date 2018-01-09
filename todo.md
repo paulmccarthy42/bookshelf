@@ -1,5 +1,7 @@
-Notes, on page level
-Display for pages in jscript
+Move Bookshelves into portfolio section
+Add book search to home page, likely using similar logic
 
-Figure out strategy for g-berg calls
-Generate a Bookshelf on account creation
+Figure out log out issue
+Prolly move sign in stuff to modals
+Individual book page
+Read page with options
