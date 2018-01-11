@@ -263,19 +263,6 @@
 
         <div class="col-md-9">
           <div class="row portfolio_container">
-            <!-- books -->
-            <div class="col-md-4 web" v-for="book in books">
-              <a v-bind:href="'/book/' + book.id" class="portfolio_item work-grid">
-                <img src="assets/img/work-1.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>{{book.title}}</span>
-                    <em>{{book.author}}</em>
-                  </div>
-                </div>
-              </a>
-            </div>
-
             <!-- add button -->
             <div class="col-md-4">
               <a href="#/book/search" class="portfolio_item work-grid">
@@ -287,6 +274,20 @@
                 </div>
               </a>
             </div> 
+            <!-- books -->
+            <div class="col-md-4 web" v-for="book in books">
+              <a v-bind:href="'#/book/' + book.id" class="portfolio_item work-grid">
+                <img src="assets/img/work-1.jpg" alt="image">
+                <div class="portfolio_item_hover">
+                  <div class="item_info">
+                    <span>{{book.title}}</span>
+                    <em>{{book.author}}</em>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            
           </div>
           <!-- end row -->
         </div>
