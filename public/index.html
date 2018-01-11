@@ -246,12 +246,14 @@
             <nav class="categories">
               <ul class="portfolio_filter">
                 <li><a href="" class="active" data-filter="*">all</a></li>
-                <li><a href="" data-filter=".photography">Bookshelf 1</a></li>
-                <li><a href="" data-filter=".web">Bookshelf 2</a></li>
-                <li><a href="" data-filter=".logo">You get the idea</a></li>
+                <div v-for="shelf in bookshelves">
+                  <li><a href="" data-filter=".web" >{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
+                </div>
+                 <!-- <li><a href="" data-filter=".web">Bookshelf 2</a></li> -->
+                <!--<li><a href="" data-filter=".logo">You get the idea</a></li>
                 <li><a href="" data-filter=".graphics">Why am I</a></li>
                 <li><a href="" data-filter=".ads">Still doing these</a></li>
-                <li><a href="" data-filter=".fashion">New Bookshelf</a></li>
+                <li><a href="" data-filter=".fashion">New Bookshelf</a></li> -->
               </ul>
             </nav>
           </div>
