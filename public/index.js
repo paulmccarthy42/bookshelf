@@ -348,13 +348,13 @@ var LogoutPage = {
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
-    { path: "/book/search/", component: SearchBookPage },
-    { path: "/book/new/:book_shelf_id", component: AddBookPage },
+    { path: "/book/search/", component: SearchBookPage }, // maybe cuttable
+    { path: "/book/new/:book_shelf_id", component: AddBookPage }, //likely cutable
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
     { path: "/bookshelves/:id", component: BookShelfPage }, //likely cuttable
-    { path: "/sign_up", component: SignUpPage },
-    { path: "/login", component: LoginPage },
+    { path: "/sign_up", component: SignUpPage }, //move to modal
+    { path: "/login", component: LoginPage }, //move to modal
     { path: "/logout", component: LogoutPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {

@@ -20,3 +20,7 @@ Mostly done, need to
 * figure out comment styling
 * figure out visuals for read, shelve buttons
 * pick a prety picture
+
+BOOK READ PAGE
+
+* all of it
