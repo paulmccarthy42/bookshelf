@@ -251,11 +251,6 @@
                 </div>
                 <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
                 <li><a v-on:click="submitNewShelf" class="active">+ new shelf</a></li>
-                 <!-- <li><a href="" data-filter=".web">Bookshelf 2</a></li> -->
-                <!--<li><a href="" data-filter=".logo">You get the idea</a></li>
-                <li><a href="" data-filter=".graphics">Why am I</a></li>
-                <li><a href="" data-filter=".ads">Still doing these</a></li>
-                <li><a href="" data-filter=".fashion">New Bookshelf</a></li> -->
               </ul>
             </nav>
           </div>
@@ -275,7 +270,7 @@
               </a>
             </div> 
             <!-- books -->
-            <div class="col-md-4 web" v-for="book in books" v-bind:class="book.shelf">
+            <div class="col-md-4" v-for="book in books" v-bind:class="book.shelf">
               <a v-bind:href="'#/book/' + book.id" class="portfolio_item work-grid">
                 <img src="assets/img/work-1.jpg" alt="image">
                 <div class="portfolio_item_hover">
