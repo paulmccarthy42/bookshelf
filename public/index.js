@@ -352,7 +352,7 @@ var router = new VueRouter({
     { path: "/book/new/:book_shelf_id", component: AddBookPage },
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
-    { path: "/bookshelves/:id", component: BookShelfPage },
+    { path: "/bookshelves/:id", component: BookShelfPage }, //likely cuttable
     { path: "/sign_up", component: SignUpPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage }
