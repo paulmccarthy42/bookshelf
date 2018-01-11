@@ -29,6 +29,9 @@ var HomePage = {
                 function(shelf) {
                   shelf.books.forEach(
                     function(book) {
+                      var classifiedTitle = shelf.title.replace(" ", "-");
+                      console.log(classifiedTitle);
+                      book.shelf = classifiedTitle;
                       this.books.push(book);
                     }.bind(this)
                   );
