@@ -12,3 +12,11 @@ Mostly done, need to
 * debug add book
 * figure out that filler
 * maybe add book search
+
+BOOK SUMMARY PAGE
+Mostly done, need to
+
+* do subcomments, adding comments
+* figure out comment styling
+* figure out visuals for read, shelve buttons
+* pick a prety picture
