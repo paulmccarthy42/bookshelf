@@ -135,6 +135,16 @@
     });
   </script>
 
+<!-- Turn -->
+  <script type="text/javascript">
+    $("#flipbook").turn({
+      width: 400,
+      height: 300,
+      autoCenter: true
+    });
+  </script>
+  <script type="text/javascript" src="turnjs4/lib/turn.js"></script>
+
 </body>
 </html>
 
@@ -427,14 +437,25 @@
 
 <template id="read-page">
   <div class="container">
-    <h1>Hello</h1>
+    <!-- <h1>Hello</h1>
     <div v-for="page in pages">
       <p v-if="page.text !== null">{{page.text}}</p>
       <div v-else>
         <p v-for="line in page.lines"><span v-if="line.line_number % 10 === 0">{{line.line_number}}</span> {{line.text}}</p>
       </div>
 
-      <p>{{page.page_number}}</p>
+      <p>{{page.page_number}}</p> -->
+      <div id="flipbook">
+        <div class="hard"> Turn.js </div>
+        <div class="hard"></div>
+        <div> Page 1 </div>
+        <div> Page 2 </div>
+        <div> Page 3 </div>
+        <div> Page 4 </div>
+        <div class="hard"></div>
+        <div class="hard"></div>
+      </div>
+
     </div>
     <router-link v-bind:to="{path: '/'}"><button>back to home</button></router-link>
   </div>
