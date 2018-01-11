@@ -275,7 +275,7 @@
               </a>
             </div> 
             <!-- books -->
-            <div class="col-md-4 web" v-for="book in books" v-model:class="book.shelf">
+            <div class="col-md-4 web" v-for="book in books" v-bind:class="book.shelf">
               <a v-bind:href="'#/book/' + book.id" class="portfolio_item work-grid">
                 <img src="assets/img/work-1.jpg" alt="image">
                 <div class="portfolio_item_hover">

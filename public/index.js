@@ -19,20 +19,20 @@ var HomePage = {
         function(response) {
           this.currentUser = response.data;
           this.message += this.currentUser.name;
-          console.log(this.currentUser);
+          // console.log(this.currentUser);
           axios.get("/v1/book_shelves").then(
             function(response) {
               this.bookshelves = response.data;
-              console.log(response.data);
+              // console.log(response.data);
               // generate full book list
               response.data.forEach(
                 function(shelf) {
                   shelf.books.forEach(
                     function(book) {
-                      var classifiedTitle = shelf.title.replace(" ", "-");
-                      console.log(classifiedTitle);
+                      var classifiedTitle = shelf.title.split(" ").join("-");
                       book.shelf = classifiedTitle;
                       this.books.push(book);
+                      console.log(classifiedTitle);
                     }.bind(this)
                   );
                 }.bind(this)
