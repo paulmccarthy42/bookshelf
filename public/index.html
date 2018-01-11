@@ -249,8 +249,8 @@
                 <div v-for="shelf in bookshelves">
                   <li><a href="" data-filter=".web" >{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
                 </div>
-                <!-- <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'> -->
-                <li><a href="" class="active" data-filter="*">+ new shelf</a></li>
+                <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
+                <li><a v-on:click="submitNewShelf" class="active">+ new shelf</a></li>
                  <!-- <li><a href="" data-filter=".web">Bookshelf 2</a></li> -->
                 <!--<li><a href="" data-filter=".logo">You get the idea</a></li>
                 <li><a href="" data-filter=".graphics">Why am I</a></li>
@@ -261,10 +261,9 @@
           </div>
         </div>
 
-        <!-- all works -->
         <div class="col-md-9">
           <div class="row portfolio_container">
-            <!-- single work -->
+            <!-- books -->
             <div class="col-md-4 web" v-for="book in books">
               <a v-bind:href="'/book/' + book.id" class="portfolio_item work-grid">
                 <img src="assets/img/work-1.jpg" alt="image">
@@ -276,21 +275,18 @@
                 </div>
               </a>
             </div>
-            <!-- end single work -->
 
-            <!-- single work -->
-            <!-- <div class="col-md-4 fashion logo">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-2.jpg" alt="image">
+            <!-- add button -->
+            <div class="col-md-4">
+              <a href="#/book/search" class="portfolio_item work-grid">
+                <img src="assets/img/add.png" alt="image">
                 <div class="portfolio_item_hover">
                   <div class="item_info">
-                    <span>super man</span>
-                    <em>photography</em>
+                    <span>Add New Book</span>
                   </div>
                 </div>
               </a>
-            </div> -->
-            <!-- end single work -->
+            </div> 
           </div>
           <!-- end row -->
         </div>
@@ -298,10 +294,9 @@
       </div>
       <!-- end container -->
     </section>
-        <!-- <div v-for='shelf in bookshelves'> -->
-          <!-- <router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + shelf.id}">add book</router-link> -->
-        <!-- </div> -->
-        <p>last notes</p>
+    <section>  
+      <p>last notes</p>
+    </section>
     </div>
   </div>
 </template>
