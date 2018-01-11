@@ -8,7 +8,8 @@ var HomePage = {
       bookshelves: [],
       submitNewName: "",
       NewShelfName: "",
-      currentUser: {}
+      currentUser: {},
+      books: [1, 2, 3, 4]
     };
   },
   created: function() {
@@ -53,7 +54,8 @@ var HomePage = {
           console.log("BOOM");
           console.log(error.response.data.errors);
         });
-    }
+    },
+    filterBookData: function() {}
   },
   computed: {}
 };
