@@ -247,7 +247,7 @@
               <ul class="portfolio_filter">
                 <li><a href="" class="active" data-filter="*">all</a></li>
                 <div v-for="shelf in bookshelves">
-                  <li><a href="" data-filter=".web" >{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
+                  <li><a  data-filter=".web" v-on:click="toggleActive(shelf.id)" v-bind="{ active : shelf.isActive}">{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
                 </div>
                 <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
                 <li><a v-on:click="submitNewShelf" class="active">+ new shelf</a></li>

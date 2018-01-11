@@ -13,7 +13,6 @@ var HomePage = {
     };
   },
   created: function() {
-    // refactor so book shelves and all other information are pulled upon confirmation of login
     axios
       .get("/v1/current_user")
       .then(
@@ -25,6 +24,7 @@ var HomePage = {
             function(response) {
               this.bookshelves = response.data;
               console.log(response.data);
+              // generate full book list
               response.data.forEach(
                 function(shelf) {
                   shelf.books.forEach(
@@ -64,6 +64,13 @@ var HomePage = {
           console.log("BOOM");
           console.log(error.response.data.errors);
         });
+    },
+    toggleActive: function(shelfID) {
+      console.log(shelfID);
+      var shelfIndex = this.bookshelves.findIndex(function(shelf) {
+        return shelf.id === shelfID;
+      });
+      this.bookshelves[shelfIndex] = true;
     },
     filterBookData: function() {}
   },
