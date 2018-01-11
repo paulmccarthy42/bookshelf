@@ -9,7 +9,7 @@ var HomePage = {
       submitNewName: "",
       NewShelfName: "",
       currentUser: {},
-      books: [1, 2, 3, 4]
+      books: []
     };
   },
   created: function() {
@@ -25,6 +25,16 @@ var HomePage = {
             function(response) {
               this.bookshelves = response.data;
               console.log(response.data);
+              response.data.forEach(
+                function(shelf) {
+                  shelf.books.forEach(
+                    function(book) {
+                      this.books.push(book);
+                    }.bind(this)
+                  );
+                }.bind(this)
+              );
+              console.log(this.books);
             }.bind(this)
           );
         }.bind(this)

@@ -249,6 +249,8 @@
                 <div v-for="shelf in bookshelves">
                   <li><a href="" data-filter=".web" >{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
                 </div>
+                <!-- <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'> -->
+                <li><a href="" class="active" data-filter="*">+ new shelf</a></li>
                  <!-- <li><a href="" data-filter=".web">Bookshelf 2</a></li> -->
                 <!--<li><a href="" data-filter=".logo">You get the idea</a></li>
                 <li><a href="" data-filter=".graphics">Why am I</a></li>
@@ -264,12 +266,12 @@
           <div class="row portfolio_container">
             <!-- single work -->
             <div class="col-md-4 web" v-for="book in books">
-              <a href="#/book/45" class="portfolio_item work-grid">
+              <a v-bind:href="'/book/' + book.id" class="portfolio_item work-grid">
                 <img src="assets/img/work-1.jpg" alt="image">
                 <div class="portfolio_item_hover">
                   <div class="item_info">
-                    <span>Give Me Liberty or Give Me Death</span>
-                    <em>{{book}}</em>
+                    <span>{{book.title}}</span>
+                    <em>{{book.author}}</em>
                   </div>
                 </div>
               </a>
@@ -289,104 +291,6 @@
               </a>
             </div> -->
             <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 ads graphics">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-5.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>bat man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 fashion ads">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-4.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>spider man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 graphics ads">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-3.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>iron man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 logo web photography">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-6.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>iron man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 ads graphics">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-2.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>iron man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 web fashion photography">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-3.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>iron man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
-
-            <!-- single work -->
-            <!-- <div class="col-md-4 fashion logo">
-              <a href="single-project.html" class="portfolio_item work-grid">
-                <img src="assets/img/work-1.jpg" alt="image">
-                <div class="portfolio_item_hover">
-                  <div class="item_info">
-                    <span>iron man</span>
-                    <em>photography</em>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- end single work -->
           </div>
           <!-- end row -->
         </div>
@@ -394,24 +298,10 @@
       </div>
       <!-- end container -->
     </section>
-
-    <div class = "container">
-
-        <div v-for='shelf in bookshelves'>
-          <h3><router-link v-bind:to="{path: '/bookshelves/' + shelf.id}"> {{shelf.title}}</router-link></h3>
-          <div v-for="book in shelf.books"><router-link v-bind:to="{path: '/book/' + book.id}">{{book.title}} </router-link></div>
-
-          <router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + shelf.id}">add book</router-link>
-        </div>
-        <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
-        <button v-on:click="submitNewShelf">add new shelf</button>
-        <p>______________________________________</p>
+        <!-- <div v-for='shelf in bookshelves'> -->
+          <!-- <router-link class='btn btn-primary' v-bind:to = "{path: '/book/new/' + shelf.id}">add book</router-link> -->
+        <!-- </div> -->
         <p>last notes</p>
-      </div>
-
-
-
-
     </div>
   </div>
 </template>
