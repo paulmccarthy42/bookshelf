@@ -13,7 +13,9 @@ var app = new Vue({
   data: function() {
     return {
       bookId: parseInt(this.$route.params.id),
-      pages: []
+      pages: [],
+      book: "",
+      author: ""
     };
   },
   created: function() {
@@ -34,13 +36,13 @@ var app = new Vue({
     axios.get("/v1/books/" + this.bookId + "/read/").then(
       function(response) {
         console.log(response.data);
-        this.pages = response.data;
+        this.pages = response.data.pages;
+        this.book = response.data.book;
+        this.author = response.data.author;
         // Title page
         $("#flipbook").turn(
           "addPage",
-          $("<div class='hard'/>").html(
-            this.pages[0].book + " by " + this.pages[0].author
-          )
+          $("<div class='hard'/>").html(this.book + " by " + this.author)
         );
         // Build pages line by line
         this.pages.forEach(function(page) {
