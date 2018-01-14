@@ -8,9 +8,15 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  el: "#app",
+  // el: "#app",
   router: router,
   created: function() {
+    $("#flipbook").turn({
+      width: 400,
+      height: 300,
+      autoCenter: true
+    });
+    console.log("hello");
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
