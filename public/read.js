@@ -35,22 +35,24 @@ var app = new Vue({
       function(response) {
         console.log(response.data);
         this.pages = response.data;
-        // build pages line by line
+        // Title page
         $("#flipbook").turn(
           "addPage",
           $("<div class='hard'/>").html(
             this.pages[0].book + " by " + this.pages[0].author
           )
         );
+        // Build pages line by line
         this.pages.forEach(function(page) {
           console.log(page.lines);
           var newPage = $("<div/>");
           page.lines.forEach(function(line) {
             newPage.append($("<div class='line'/>").html(line.text));
           });
-
+          // add page to flipbook
           $("#flipbook").turn("addPage", newPage);
         });
+        // add closing page
         $("#flipbook").turn("addPage", $("<div class='hard'/>").html(""));
       }.bind(this)
     );
