@@ -37,6 +37,12 @@ var app = new Vue({
         console.log(response.data);
         this.pages = response.data;
         // build pages line by line
+        $("#flipbook").turn(
+          "addPage",
+          $("<div class='hard'/>").html(
+            this.pages[0].book + " by " + this.pages[0].author
+          )
+        );
         this.pages.forEach(function(page) {
           console.log(page.lines);
           var newPage = $("<div/>");
@@ -46,9 +52,8 @@ var app = new Vue({
 
           $("#flipbook").turn("addPage", newPage);
         });
+        $("#flipbook").turn("addPage", $("<div class='hard'/>").html(""));
       }.bind(this)
     );
   }
 });
-
-$("#test").append($("<div class='test'/>").html("hello"));

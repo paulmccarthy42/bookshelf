@@ -24,6 +24,7 @@ class V1::BooksController < ApplicationController
   end
 
   def read
+    book = Book.where(id: params[:id])
     pages = Page.where(book_id: params[:id])
     render json: pages.as_json
   end

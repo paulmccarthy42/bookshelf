@@ -20,6 +20,7 @@ class Page < ApplicationRecord
   def as_json
     {
       book: book.title,
+      author: book.author,
       text: text,
       page_number: page_number,
       book_id: book_id,
