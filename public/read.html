@@ -32,17 +32,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.turnjs.com/lib/turn.min.js"></script>
   <div id = "app">
+    <p>{{test}}</p>
     <div id="flipbook">
       <div class="hard"> Turn.js </div>
       <div class="hard"></div>
-      <div> Page 1 </div>
-      <div> Page 2 </div>
+      <div v-for="x in test"> Page 1: hello </div>
+      <!-- <div> Page 2 </div>
       <div> Page 3 </div>
-      <div> Page 4 </div>
+      <div> Page 4 </div> -->
       <div class="hard"></div>
       <div class="hard"></div>
     </div>
     <a href="/"><button >back</button></a>
-  </div> end of app
+  </div> <!-- end of app -->
 </body>
 </html>
