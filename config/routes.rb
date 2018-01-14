@@ -7,9 +7,9 @@ Rails.application.routes.draw do
     get "/pages/:id" => "pages#show"
 
     get "/books" => "books#index"
-    get "books/check" => "books#check"
-    get "books/search" => "books#search"
-    get "books/:id/read" => "books#read"
+    get "/books/check" => "books#check"
+    get "/books/search" => "books#search"
+    get "/books/:id/read" => "books#read"
     get "/books/:id" => "books#show"
     post "/books" => "books#create"
 
@@ -22,5 +22,7 @@ Rails.application.routes.draw do
 
     get "book_selections/" => "book_selections#index"
     post "/book_selections" => "book_selections#create"
+
+    post "/comments" => "comments#create"
   end
 end

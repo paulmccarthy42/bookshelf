@@ -7,8 +7,8 @@ class Comment < ApplicationRecord
     return {
       id: id,
       comment_text: comment,
-      author: user.name
-      #find a way to add subcomments in a way that doesn't break activerecord
+      author: user.name,
+      subcomments: comments.as_json
     }
   end
 end

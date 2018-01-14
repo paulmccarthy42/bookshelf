@@ -94,3 +94,15 @@ body {
 .page-number {
   text-align: right;
 }
+
+.form-group {
+  float: left;
+}
+
+div.comment:nth-child(even) {
+  background-color: red;
+}
+
+div.comment:nth-child(odd) {
+  background-color: blue;
+}

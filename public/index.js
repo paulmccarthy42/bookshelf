@@ -84,17 +84,19 @@ var BookSummaryPage = {
   template: "#book-page",
   data: function() {
     return {
-      message: "Welcome to Book #" + this.$route.params.id,
+      bookId: this.$route.params.id,
       info: {},
       bookshelves: [],
       currentUser: {},
-      selectedShelf: ""
+      selectedShelf: "",
+      comment: ""
     };
   },
   created: function() {
     axios.get("/v1/books/" + this.$route.params.id).then(
       function(response) {
         this.info = response.data;
+        console.log(this.info);
       }.bind(this)
     );
 
@@ -131,6 +133,22 @@ var BookSummaryPage = {
         })
         .catch(function(error) {
           console.log(error.response.data.errors);
+        });
+    },
+    addComment: function() {
+      var params = {};
+      params.comment = this.comment;
+      params.id = this.bookId;
+      params.commented = "Book";
+      axios
+        .post("v1/comments", params)
+        .then(
+          function(response) {
+            this.info.comments.push(response.data);
+          }.bind(this)
+        )
+        .catch(function(error) {
+          console.log(error);
         });
     }
   },
@@ -236,6 +254,7 @@ var SearchBookPage = {
   computed: {}
 };
 
+// on mothballs
 var BookReadPage = {
   template: "#read-page",
   data: function() {

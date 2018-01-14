@@ -1,6 +1,5 @@
 Add book search to home page, likely using similar logic
 
-Figure out log out issue
 Prolly move sign in stuff to modals
 Individual book page
 Read page with options
@@ -23,4 +22,4 @@ Mostly done, need to
 
 BOOK READ PAGE
 
-* all of it
+* comments/links
