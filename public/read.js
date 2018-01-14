@@ -51,6 +51,9 @@ var app = new Vue({
           page.lines.forEach(function(line) {
             newPage.append($("<div class='line'/>").html(line.text));
           });
+          newPage.append(
+            $("<div class='page-number'/>").html(page.page_number)
+          );
           // add page to flipbook
           $("#flipbook").turn("addPage", newPage);
         });
