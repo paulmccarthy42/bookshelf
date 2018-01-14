@@ -12,21 +12,28 @@ var app = new Vue({
   router: router,
   data: function() {
     return {
-      test: [1, 2, 3, 4]
+      test: [1, 2, 3, 4],
+      bookId: 45,
+      pages: []
     };
   },
   created: function() {
-    // Create theturn book
+    // Create the turn book
     $("#flipbook").turn({
-      width: 400,
-      height: 300,
+      width: 1000,
+      height: 600,
       autoCenter: true
     });
-    var pages = [1, 2, 3, 4];
-    pages.forEach(function(page) {
-      var element = $("<div />").html(page);
-      $("#flipbook").turn("addPage", element);
-    });
+    console.log(this);
+    axios.get("/v1/books/" + parseInt(this.$route.params.id) + "/read/").then(
+      function(response) {
+        console.log(response.data);
+        this.pages = response.data;
+        this.pages.forEach(function(page) {
+          AddPage(page);
+        });
+      }.bind(this)
+    );
     // check if logged in
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -34,3 +41,8 @@ var app = new Vue({
     }
   }
 });
+
+function AddPage(page) {
+  var element = $("<div />").html(page.text);
+  $("#flipbook").turn("addPage", element);
+}
