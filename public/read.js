@@ -8,7 +8,7 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  // el: "#app",
+  el: "#app",
   router: router,
   data: function() {
     return {
@@ -20,6 +20,11 @@ var app = new Vue({
       width: 400,
       height: 300,
       autoCenter: true
+    });
+    var pages = [1, 2, 3, 4];
+    pages.forEach(function(page) {
+      var element = $("<div />").html(page);
+      $("#flipbook").turn("addPage", element);
     });
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
