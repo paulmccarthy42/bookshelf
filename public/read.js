@@ -8,7 +8,7 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  el: "#app",
+  // el: "#app",
   router: router,
   data: function() {
     return {
@@ -16,6 +16,7 @@ var app = new Vue({
     };
   },
   created: function() {
+    // Create theturn book
     $("#flipbook").turn({
       width: 400,
       height: 300,
@@ -26,6 +27,7 @@ var app = new Vue({
       var element = $("<div />").html(page);
       $("#flipbook").turn("addPage", element);
     });
+    // check if logged in
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
