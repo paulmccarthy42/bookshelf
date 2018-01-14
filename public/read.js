@@ -49,7 +49,12 @@ var app = new Vue({
           console.log(page.lines);
           var newPage = $("<div/>");
           page.lines.forEach(function(line) {
-            newPage.append($("<div class='line'/>").html(line.text));
+            // add lines to flipbook
+            if (line.comments.length === 0) {
+              newPage.append($("<div class='line'/>").html(line.text));
+            } else {
+              newPage.append($("<mark class='line'/>").html(line.text));
+            }
           });
           newPage.append(
             $("<div class='page-number'/>").html(page.page_number)

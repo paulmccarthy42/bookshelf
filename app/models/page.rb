@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
   belongs_to :book
   has_many :lines
-  has_many :comments
+  has_many :comments, as: :commentable
 
   def display
     pretty_page = ""
@@ -24,7 +24,7 @@ class Page < ApplicationRecord
       text: text,
       page_number: page_number,
       book_id: book_id,
-      lines: lines.order(:line_number)
+      lines: (lines.order(:line_number)).as_json
     }
   end
 end
