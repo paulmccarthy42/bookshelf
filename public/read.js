@@ -12,8 +12,7 @@ var app = new Vue({
   router: router,
   data: function() {
     return {
-      test: [1, 2, 3, 4],
-      bookId: 45,
+      bookId: parseInt(this.$route.params.id),
       pages: []
     };
   },
@@ -32,7 +31,7 @@ var app = new Vue({
       height: 700,
       autoCenter: true
     });
-    axios.get("/v1/books/" + parseInt(this.$route.params.id) + "/read/").then(
+    axios.get("/v1/books/" + this.bookId + "/read/").then(
       function(response) {
         console.log(response.data);
         this.pages = response.data;
