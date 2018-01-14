@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios */
+/* global Vue, VueRouter, axios, $ */
 
 var router = new VueRouter({
   routes: [{ path: "/:id" }],
@@ -8,29 +8,58 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  // el: "#app",
+  el: "#app",
   router: router,
   data: function() {
     return {
-      test: [1, 2, 3, 4]
+      bookId: parseInt(this.$route.params.id),
+      pages: [],
+      book: "",
+      author: ""
     };
   },
   created: function() {
-    // Create theturn book
-    $("#flipbook").turn({
-      width: 400,
-      height: 300,
-      autoCenter: true
-    });
-    var pages = [1, 2, 3, 4];
-    pages.forEach(function(page) {
-      var element = $("<div />").html(page);
-      $("#flipbook").turn("addPage", element);
-    });
     // check if logged in
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
+  },
+  mounted: function() {
+    // Create the turn book
+    console.log("hello", $("#flipbook"));
+    $("#flipbook").turn({
+      width: 1000,
+      height: 700,
+      autoCenter: true
+    });
+    axios.get("/v1/books/" + this.bookId + "/read/").then(
+      function(response) {
+        console.log(response.data);
+        this.pages = response.data.pages;
+        this.book = response.data.book;
+        this.author = response.data.author;
+        // Title page
+        $("#flipbook").turn(
+          "addPage",
+          $("<div class='hard'/>").html(this.book + " by " + this.author)
+        );
+        // Build pages line by line
+        this.pages.forEach(function(page) {
+          console.log(page.lines);
+          var newPage = $("<div/>");
+          page.lines.forEach(function(line) {
+            newPage.append($("<div class='line'/>").html(line.text));
+          });
+          newPage.append(
+            $("<div class='page-number'/>").html(page.page_number)
+          );
+          // add page to flipbook
+          $("#flipbook").turn("addPage", newPage);
+        });
+        // add closing page
+        $("#flipbook").turn("addPage", $("<div class='hard'/>").html(""));
+      }.bind(this)
+    );
   }
 });

@@ -24,8 +24,12 @@ class V1::BooksController < ApplicationController
   end
 
   def read
-    pages = Page.where(book_id: params[:id])
-    render json: pages.as_json
+    book = Book.find_by(id: params[:id])
+    pages = book.pages.sort {|x,y| x.page_number <=> y.page_number}
+    render json: {
+      book: book.title,
+      author: book.author,
+      pages: pages.as_json}
   end
 
   def create

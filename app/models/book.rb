@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   has_many :book_selections
   has_many :book_shelves, through: :book_selections
   has_many :comments, as: :commentable
+  has_many :pages
 
   def pages
     Page.all.where(book_id: id).sort{|page1, page2| page1.page_number <=> page2.page_number}
