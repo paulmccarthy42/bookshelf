@@ -203,57 +203,15 @@ var SearchBookPage = {
     };
   },
   created: function() {
-    var url = "v1/books/search?title=" + this.$route.query.title;
-    console.log(url);
+    var url = "v1/books/";
     axios.get(url).then(
       function(response) {
-        console.log(response);
+        console.log(response.data);
         this.booksOnfile = response.data;
       }.bind(this)
     );
   },
-  methods: {
-    searchGutenberg: function() {
-      // check and see if already found
-      console.log("test");
-      axios
-        .get("https://gutenbergapi.org/texts/" + this.bookInfo.gutenberg_id) //breaks if you use jwt in header
-        .then(
-          function(response) {
-            this.bookInfo.title = response.data.metadata.title[0];
-            this.bookInfo.author = response.data.metadata.author[0];
-            this.bookInfo.language = response.data.metadata.language[0];
-            console.log(this.bookInfo.gutenberg_id);
-            axios
-              .get("/v1/books/check", {
-                params: { gutenberg_id: this.bookInfo.gutenberg_id }
-              })
-              .then(
-                function(response) {
-                  if (response.data === "pass") {
-                    console.log("true");
-                    this.toggleSearching();
-                  } else {
-                    console.log("false");
-                    return false;
-                  }
-                }.bind(this)
-              );
-          }.bind(this)
-        );
-    },
-    toggleSearching: function() {
-      this.searching = !this.searching;
-    },
-    submitNewBook: function() {
-      axios.post("/v1/books", this.bookInfo).then(
-        function() {
-          router.push("/");
-        }.bind(this)
-      );
-    }
-    // second method pushing gberg data to database and calling page controllers
-  },
+  methods: {},
   computed: {}
 };
 
@@ -371,7 +329,6 @@ var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/book/search/", component: SearchBookPage }, // maybe cuttable
-    { path: "/book/new/:book_shelf_id", component: AddBookPage }, //likely cutable
     { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
     { path: "/bookshelves/:id", component: BookShelfPage }, //likely cuttable
