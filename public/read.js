@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios */
+/* global Vue, VueRouter, axios, $ */
 
 var router = new VueRouter({
   routes: [{ path: "/:id" }],
@@ -8,7 +8,7 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  // el: "#app",
+  el: "#app",
   router: router,
   data: function() {
     return {
@@ -18,31 +18,28 @@ var app = new Vue({
     };
   },
   created: function() {
-    // Create the turn book
-    $("#flipbook").turn({
-      width: 1000,
-      height: 600,
-      autoCenter: true
-    });
-    console.log(this);
-    axios.get("/v1/books/" + parseInt(this.$route.params.id) + "/read/").then(
-      function(response) {
-        console.log(response.data);
-        this.pages = response.data;
-        this.pages.forEach(function(page) {
-          AddPage(page);
-        });
-      }.bind(this)
-    );
     // check if logged in
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
+  },
+  mounted: function() {
+    // Create the turn book
+    console.log("hello", $("#flipbook"));
+    $("#flipbook").turn({
+      width: 1000,
+      height: 600,
+      autoCenter: true
+    });
+    axios.get("/v1/books/" + parseInt(this.$route.params.id) + "/read/").then(
+      function(response) {
+        console.log(response.data);
+        this.pages = response.data;
+        this.pages.forEach(function(page) {
+          $("#flipbook").turn("addPage", $("<div />").html(page.text));
+        });
+      }.bind(this)
+    );
   }
 });
-
-function AddPage(page) {
-  var element = $("<div />").html(page.text);
-  $("#flipbook").turn("addPage", element);
-}
