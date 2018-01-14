@@ -29,17 +29,26 @@ var app = new Vue({
     console.log("hello", $("#flipbook"));
     $("#flipbook").turn({
       width: 1000,
-      height: 600,
+      height: 700,
       autoCenter: true
     });
     axios.get("/v1/books/" + parseInt(this.$route.params.id) + "/read/").then(
       function(response) {
         console.log(response.data);
         this.pages = response.data;
+        // build pages line by line
         this.pages.forEach(function(page) {
-          $("#flipbook").turn("addPage", $("<div />").html(page.text));
+          console.log(page.lines);
+          var newPage = $("<div/>");
+          page.lines.forEach(function(line) {
+            newPage.append($("<div class='line'/>").html(line.text));
+          });
+
+          $("#flipbook").turn("addPage", newPage);
         });
       }.bind(this)
     );
   }
 });
+
+$("#test").append($("<div class='test'/>").html("hello"));
