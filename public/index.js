@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios */
+/* global Vue, VueRouter, axios, initalizeTheme */
 
 var HomePage = {
   template: "#home-page",
@@ -120,6 +120,9 @@ var BookSummaryPage = {
           this.message = "Please log in";
         }.bind(this)
       );
+  },
+  mounted: function() {
+    initalizeTheme();
   },
   methods: {
     shelveABook: function(bookId) {
