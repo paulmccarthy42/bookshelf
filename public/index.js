@@ -158,17 +158,20 @@ var BookSummaryPage = {
     addSubComment: function(parentCommentId) {
       var params = {};
       params.comment = this.subcomment;
-      params.id = this.bookId;
+      params.id = parentCommentId;
       params.commented = "Comment";
       axios
         .post("v1/comments", params)
         .then(
           function(response) {
             var comments = this.info.comments;
-            console.log("hello", comments);
+            console.log("hello", comments, parentCommentId);
             var commentIndex = comments.findIndex(function(comment) {
-              comment.id = parentCommentId;
+              return comment.id === parentCommentId;
             });
+            console.log(commentIndex);
+            console.log(comments[commentIndex]);
+
             comments[commentIndex].subcomments.push(response.data);
           }.bind(this)
         )
