@@ -89,7 +89,8 @@ var BookSummaryPage = {
       bookshelves: [],
       currentUser: {},
       selectedShelf: "",
-      comment: ""
+      comment: "",
+      subcomment: ""
     };
   },
   created: function() {
@@ -148,6 +149,27 @@ var BookSummaryPage = {
         .then(
           function(response) {
             this.info.comments.push(response.data);
+          }.bind(this)
+        )
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    addSubComment: function(parentCommentId) {
+      var params = {};
+      params.comment = this.subcomment;
+      params.id = this.bookId;
+      params.commented = "Comment";
+      axios
+        .post("v1/comments", params)
+        .then(
+          function(response) {
+            var comments = this.info.comments;
+            console.log("hello", comments);
+            var commentIndex = comments.findIndex(function(comment) {
+              comment.id = parentCommentId;
+            });
+            comments[commentIndex].subcomments.push(response.data);
           }.bind(this)
         )
         .catch(function(error) {

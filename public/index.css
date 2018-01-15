@@ -7,7 +7,7 @@
 }
 
 body {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 #flipbook {
@@ -99,10 +99,6 @@ body {
   float: left;
 }
 
-div.comment:nth-child(even) {
-  background-color: red;
-}
-
-div.comment:nth-child(odd) {
-  background-color: blue;
+.subcomment {
+  font-size: 6px;
 }

@@ -53,7 +53,9 @@ var app = new Vue({
             if (line.comments.length === 0) {
               newPage.append($("<div class='line'/>").html(line.text));
             } else {
-              newPage.append($("<mark class='line'/>").html(line.text));
+              var newLine = $("<mark class='line' />").html(line.text);
+
+              newPage.append(newLine);
             }
           });
           newPage.append(
