@@ -2415,3 +2415,32 @@ ul.services-list li {
 #add-comment {
     padding: none;
 }
+
+.tool-tip-line {
+    position: relative;
+    display: inline-block;
+    padding: none;
+    /*border-bottom: 1px dotted black;*/
+}
+
+.tool-tip-line + .tool-tip-info {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.tool-tip-line:hover + .tool-tip-info {
+    visibility: visible;
+}
+
+.tool-tip-info {
+    font-style: italic;
+}
