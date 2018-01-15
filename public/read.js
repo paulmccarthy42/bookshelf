@@ -56,9 +56,13 @@ var app = new Vue({
               // add commented line as mark
             } else {
               var newLine = $("<div class='line'/>").html(
-                $("<mark class='tool-tip-line' />").html(line.text)
+                $("<div class='tool-tip-line' />").html(line.text)
               );
-              newLine.append($("<span class='tool-tip-info' />").html("hello"));
+              newLine.append(
+                $("<span class='tool-tip-info' />").html(
+                  line.comments[0].comment_text
+                )
+              );
 
               newPage.append(newLine);
             }

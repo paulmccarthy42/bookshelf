@@ -2421,11 +2421,12 @@ ul.services-list li {
     display: inline-block;
     padding: none;
     /*border-bottom: 1px dotted black;*/
+    font-weight: bold;
 }
 
 .tool-tip-line + .tool-tip-info {
     visibility: hidden;
-    width: 120px;
+    width: 200px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -2441,6 +2442,3 @@ ul.services-list li {
     visibility: visible;
 }
 
-.tool-tip-info {
-    font-style: italic;
-}
