@@ -90,7 +90,7 @@ var BookSummaryPage = {
       currentUser: {},
       selectedShelf: "",
       comment: "",
-      subcomment: ""
+      subcommentsText: {}
     };
   },
   created: function() {
@@ -149,6 +149,7 @@ var BookSummaryPage = {
         .then(
           function(response) {
             this.info.comments.push(response.data);
+            this.comment = "";
           }.bind(this)
         )
         .catch(function(error) {
@@ -157,7 +158,9 @@ var BookSummaryPage = {
     },
     addSubComment: function(parentCommentId) {
       var params = {};
-      params.comment = this.subcomment;
+      var subcommentText = this.subcommentsText;
+      console.log("TEXT", subcommentText);
+      params.comment = subcommentText;
       params.id = parentCommentId;
       params.commented = "Comment";
       axios

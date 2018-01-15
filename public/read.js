@@ -48,12 +48,16 @@ var app = new Vue({
         this.pages.forEach(function(page) {
           console.log(page.lines);
           var newPage = $("<div/>");
+          // add lines to flipbook
           page.lines.forEach(function(line) {
-            // add lines to flipbook
+            // add uncommented line
             if (line.comments.length === 0) {
               newPage.append($("<div class='line'/>").html(line.text));
+              // add commented line as mark
             } else {
-              var newLine = $("<mark class='line' />").html(line.text);
+              var newLine = $("<div class='line'/>").html(
+                $("<mark />").html(line.text)
+              );
 
               newPage.append(newLine);
             }
