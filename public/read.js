@@ -58,11 +58,13 @@ var app = new Vue({
               var newLine = $("<div class='line'/>").html(
                 $("<div class='tool-tip-line' />").html(line.text)
               );
-              newLine.append(
-                $("<span class='tool-tip-info' />").html(
-                  line.comments[0].comment_text
-                )
-              );
+              var text = "";
+              line.comments.forEach(function(comment) {
+                text += "- ";
+                text += comment.comment_text;
+                text += "<br>";
+              });
+              newLine.append($("<span class='tool-tip-info' />").html(text));
 
               newPage.append(newLine);
             }

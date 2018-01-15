@@ -2429,9 +2429,10 @@ ul.services-list li {
     width: 200px;
     background-color: black;
     color: #fff;
-    text-align: center;
-    padding: 5px 0;
+    text-align: left;
+    padding: 5px;
     border-radius: 6px;
+    text-indent: 0px;
 
     /* Position the tooltip text - see examples below! */
     position: absolute;
