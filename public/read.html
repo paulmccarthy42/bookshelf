@@ -35,8 +35,11 @@
     <script type="text/javascript" src="http://www.turnjs.com/lib/turn.min.js"></script>
   <div id = "app">
     <div class="commentary-left" v-if="currentLeftPage > 2">
-      <div v-for="line in currentLeftLines">
-        {{line.comments.length}}
+            <div v-for="line in currentLeftLines">
+        <button class="accordion" v-on:click="accordionOut(currentLeftLines.indexOf(line))">Section 1 <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
+        <div class="panel">
+          <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
+        </div>
       </div>
     </div>
     <div class="test">
@@ -47,8 +50,14 @@
     </div>
     <div class="commentary-right">
       <div v-for="line in currentRightLines">
-        {{line.comments.length}}
+        <button class="accordion" v-on:click="accordionOut(currentRightLines.indexOf(line))">Section 1 <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
+        <div class="panel">
+          <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
+        </div>
       </div>
+      <!-- <div v-for="line in currentRightLines">
+        {{line.comments.length}}
+      </div> -->
     </div>
   </div>
     <a href="/"><button >back</button></a>

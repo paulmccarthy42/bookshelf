@@ -116,9 +116,9 @@ body {
 }
 
 .commentary-right {
-  background-color: #e6e8ed;
+  /*background-color: #e6e8ed;*/
 
-  width: 100px;
+  width: 300px;
   position: absolute;
   right: 16px;
   top: 10px;
@@ -126,11 +126,54 @@ body {
 }
 
 .commentary-left {
-  background-color: #e6e8ed;
-
-  width: 100px;
+  /*background-color: #e6e8ed;*/
+  width: 300px;
   position: absolute;
   left: 16px;
   top: 10px;
   height: 700px;
+}
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  /*padding: 18px;*/
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 10px;
+  height: 15px;
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: "\002B";
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  margin: 0;
+}
+
+.small-badge {
+  font-size: 10px;
 }

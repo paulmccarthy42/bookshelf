@@ -19,7 +19,8 @@ var app = new Vue({
       currentLeftPage: 0,
       currentRightPage: 1,
       currentLeftLines: [],
-      currentRightLines: []
+      currentRightLines: [],
+      acc: document.getElementsByClassName("accordion")
     };
   },
   created: function() {
@@ -107,6 +108,18 @@ var app = new Vue({
   methods: {
     bookmark: function() {
       console.log("bookmark on", this.currentRightPage);
+    },
+    accordionOut: function(index) {
+      console.log(this.acc);
+      var button = this.acc[index];
+      button.classList.toggle("active");
+
+      var panel = button.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
     }
   }
 });
