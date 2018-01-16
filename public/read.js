@@ -17,7 +17,9 @@ var app = new Vue({
       book: "",
       author: "",
       currentLeftPage: 0,
-      currentRightPage: 1
+      currentRightPage: 1,
+      currentLeftLines: [],
+      currentRightLines: []
     };
   },
   created: function() {
@@ -39,9 +41,19 @@ var app = new Vue({
     $("#flipbook").bind(
       "turning",
       function(event, page, view) {
-        console.log("turning", event, page, view);
-        this.currentRightPage = view[0];
-        this.currentPageLeft = view[1];
+        this.currentLeftPage = view[0];
+        if (this.currentLeftPage < 3) {
+          this.currentLeftLines = null;
+        } else {
+          this.currentLeftLines = this.pages[this.currentLeftPage - 3].lines;
+        }
+        this.currentRightPage = view[1];
+        if (this.currentRightPage < 3) {
+          this.currentRightLines = null;
+        } else {
+          this.currentRightLines = this.pages[this.currentRightPage - 3].lines;
+        }
+        console.log(this.pages[5]);
       }.bind(this)
     );
     // Build the book
@@ -93,10 +105,8 @@ var app = new Vue({
     );
   },
   methods: {
-    checkPage: function() {
-      // this.currentPage = $("#flipbook").turn("page");
-      // console.log("hello", $("#flipbook").turn("page"));
-      console.log("goodbye", this.currentPage);
+    bookmark: function() {
+      console.log("bookmark on", this.currentRightPage);
     }
   }
 });

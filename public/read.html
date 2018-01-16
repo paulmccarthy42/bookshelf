@@ -34,13 +34,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.turnjs.com/lib/turn.min.js"></script>
   <div id = "app">
-    <div id="flipbook">
-      <div class="hard"> Click on left side of screen to turn page </div>
-      <!-- content gets added here over time -->
+    <div class="commentary-left" v-if="currentLeftPage > 2">
+      <div v-for="line in currentLeftLines">
+        {{line.comments.length}}
+      </div>
     </div>
-    <a href="/"><button >back</button></a>
-    <button ><a class="btn-primary" v-on:click="checkPage">test</a></button>
+    <div class="test">
+      <div id="flipbook">
+        <div class="hard"> Click on left side of screen to turn page </div>
+        <!-- content gets added here over time -->
+      </div>
+    </div>
+    <div class="commentary-right">
+      <div v-for="line in currentRightLines">
+        {{line.comments.length}}
+      </div>
+    </div>
   </div>
+    <a href="/"><button >back</button></a>
+    <button ><a v-on:click="bookmark">Bookmark page</a></button>
 
 </body>
 </html>

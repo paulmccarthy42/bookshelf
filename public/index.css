@@ -16,6 +16,7 @@ body {
   margin-left: 10px;
   border-color: black;
   border-width: 1px;
+  position: relative;
   /*width: 400px;
   height: 300px;*/
 }
@@ -107,4 +108,29 @@ body {
 
 .subcomment {
   font-size: 6px;
+}
+
+.test {
+  position: relative;
+  margin-left: 200px;
+}
+
+.commentary-right {
+  background-color: #e6e8ed;
+
+  width: 100px;
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  height: 700px;
+}
+
+.commentary-left {
+  background-color: #e6e8ed;
+
+  width: 100px;
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  height: 700px;
 }
