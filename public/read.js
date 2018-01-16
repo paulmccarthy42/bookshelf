@@ -15,7 +15,9 @@ var app = new Vue({
       bookId: parseInt(this.$route.params.id),
       pages: [],
       book: "",
-      author: ""
+      author: "",
+      currentLeftPage: 0,
+      currentRightPage: 1
     };
   },
   created: function() {
@@ -33,6 +35,16 @@ var app = new Vue({
       height: 700,
       autoCenter: true
     });
+    // hook pages into vue data
+    $("#flipbook").bind(
+      "turning",
+      function(event, page, view) {
+        console.log("turning", event, page, view);
+        this.currentRightPage = view[0];
+        this.currentPageLeft = view[1];
+      }.bind(this)
+    );
+    // Build the book
     axios.get("/v1/books/" + this.bookId + "/read/").then(
       function(response) {
         console.log(response.data);
@@ -79,5 +91,12 @@ var app = new Vue({
         $("#flipbook").turn("addPage", $("<div class='hard'/>").html(""));
       }.bind(this)
     );
+  },
+  methods: {
+    checkPage: function() {
+      // this.currentPage = $("#flipbook").turn("page");
+      // console.log("hello", $("#flipbook").turn("page"));
+      console.log("goodbye", this.currentPage);
+    }
   }
 });
