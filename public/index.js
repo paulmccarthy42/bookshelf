@@ -243,29 +243,6 @@ var SearchBookPage = {
   computed: {}
 };
 
-// on mothballs
-var BookReadPage = {
-  template: "#read-page",
-  data: function() {
-    return {
-      pages: [],
-      bookId: parseInt(this.$route.params.id)
-    };
-  },
-  created: function() {
-    console.log("hello");
-    var params = {};
-    axios.get("/v1/books/" + this.bookId + "/read/").then(
-      function(response) {
-        console.log(response.data);
-        this.pages = response.data;
-      }.bind(this)
-    );
-  },
-  methods: {},
-  computed: {}
-};
-
 var BookShelfPage = {
   template: "#bookshelf-page",
   data: function() {
@@ -357,7 +334,6 @@ var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/book/search/", component: SearchBookPage }, // maybe cuttable
-    { path: "/books/:id/read", component: BookReadPage },
     { path: "/book/:id", component: BookSummaryPage },
     { path: "/bookshelves/:id", component: BookShelfPage }, //likely cuttable
     { path: "/sign_up", component: SignUpPage }, //move to modal

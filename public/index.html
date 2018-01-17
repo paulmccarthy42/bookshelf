@@ -379,21 +379,5 @@
   </div>
 </template>
 
-<template id="read-page">
-  <div class="container">
-     <div v-for="page in pages">
-      <p v-if="page.text !== null">{{page.text}}</p>
-      <div v-else>
-        <p v-for="line in page.lines"><span v-if="line.line_number % 10 === 0">{{line.line_number}}</span> {{line.text}}</p>
-      </div>
 
-      <p>{{page.page_number}}</p>
-
-    </div>
-    <router-link v-bind:to="{path: '/'}"><button>back to home</button></router-link>
-
-
-
-  </div>
-</template>
 

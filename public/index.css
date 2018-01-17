@@ -177,3 +177,7 @@ body {
 .small-badge {
   font-size: 10px;
 }
+
+.toolbar-read-page {
+  text-align: center;
+}

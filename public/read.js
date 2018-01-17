@@ -120,6 +120,19 @@ var app = new Vue({
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
+    },
+    spritz: function() {
+      var script = document.createElement("script");
+
+      script.setAttribute(
+        "src",
+        "https://sdk.spritzinc.com/bookmarklet/latest/js/SpritzletOuter.js"
+      );
+      script.onload = function() {
+        console.log(script.run);
+      };
+
+      document.head.appendChild(script);
     }
   }
 });
