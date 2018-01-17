@@ -68,6 +68,7 @@ class V1::BooksController < ApplicationController
     if selections[0]
       bookmarked_page_number = selections[0].bookmarked_page_number
     end
+    puts bookmarked_page_number
     render json: { bookmarked_page_number: bookmarked_page_number}
   end
 

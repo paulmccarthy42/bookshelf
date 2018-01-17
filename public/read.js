@@ -102,6 +102,15 @@ var app = new Vue({
         });
         // add closing page
         $("#flipbook").turn("addPage", $("<div class='hard'/>").html(""));
+        axios
+          .get("http://localhost:3000/v1/books/" + this.bookId + "/mark")
+          .then(function(response) {
+            console.log(response.data);
+            $("#flipbook").turn("page", response.data.bookmarked_page_number);
+          })
+          .catch(function(error) {
+            $("#flipbook").turn("page", 0);
+          });
       }.bind(this)
     );
   },
