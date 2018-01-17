@@ -223,7 +223,7 @@
               <ul class="portfolio_filter">
                 <li><a href="" class="active" data-filter="*">all</a></li>
                 <div v-for="shelf in bookshelves">
-                  <li><a  data-filter=".web" v-on:click="toggleActive(shelf.id)" v-bind:class="{ active : shelf.isActive}">{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
+                  <li><a  v-bind:data-filter="'.'+ shelf.classTitle" v-on:click="toggleActive(shelf.id)" v-bind:class="{ active : shelf.isActive}">{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
                 </div>
                 <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
                 <li><a v-on:click="submitNewShelf" class="active">+ new shelf</a></li>
@@ -372,12 +372,17 @@
 </template>
 
 <template id="search-book-page">
-  <div>
+  <div style="padding-left: 100px;">
     <div v-for="book in booksOnfile">
       <p><strong>{{book.title}}</strong> by {{book.author}}</p>
     </div>
+    <textarea v-model="OCRText"></textarea>
+    <input type="file" id="ocr_upload" v-on:change="uploadFile($event)">
+    <!-- <input type="button" value="submit" v:on-click="submit"> -->
+    <p>test: </p>
   </div>
 </template>
+
 
 
 

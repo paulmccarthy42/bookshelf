@@ -22,7 +22,11 @@ var HomePage = {
           // console.log(this.currentUser);
           axios.get("/v1/book_shelves").then(
             function(response) {
-              this.bookshelves = response.data;
+              var shelves = response.data;
+              shelves.forEach(function(shelf) {
+                shelf.classTitle = shelf.title.split(" ").join("-");
+              });
+              this.bookshelves = shelves;
               // console.log(response.data);
               // generate full book list
               response.data.forEach(
@@ -227,7 +231,8 @@ var SearchBookPage = {
       searching: true,
       booksOnfile: [],
       bookInfo: {},
-      errors: []
+      errors: [],
+      OCRText: ""
     };
   },
   created: function() {
@@ -239,7 +244,15 @@ var SearchBookPage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    uploadFile: function(event) {
+      console.log("hello");
+      if (event.target.files.length > 0) {
+        var formData = new FormData();
+        formData.append("image", event.target.files[0]);
+      }
+    }
+  },
   computed: {}
 };
 
@@ -328,6 +341,11 @@ var LogoutPage = {
     localStorage.removeItem("jwt");
     router.push("/");
   }
+};
+
+var TestPage = {
+  template: "#test-page",
+  created: console.log("hello")
 };
 
 var router = new VueRouter({
