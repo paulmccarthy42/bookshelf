@@ -61,6 +61,19 @@ class V1::BooksController < ApplicationController
     end
     render json: books.as_json
   end
+
+  def bookmark
+    book = Book.find_by(id: params[:id])
+    selections = BookSelection.where(book_id: params[:id])
+    selections.each do |shelved_book|
+      shelved_book.bookmarked_page_number = params[:page_number]
+    end
+    if selections.each {|x| x.save}
+      render json: ":)"
+    else
+      render json: "do not want"
+    end
+  end
 end
 
 

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "/books/check" => "books#check"
     get "/books/search" => "books#search"
     get "/books/:id/read" => "books#read"
+    patch "/books/:id/mark/:page_number" => "books#bookmark"
     get "/books/:id" => "books#show"
     post "/books" => "books#create"
 
