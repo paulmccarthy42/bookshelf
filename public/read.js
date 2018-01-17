@@ -38,23 +38,38 @@ var app = new Vue({
       height: 700,
       autoCenter: true
     });
-    // hook pages into vue data
+    // create events on page turn
     $("#flipbook").bind(
       "turning",
       function(event, page, view) {
+        // generate left notes
         this.currentLeftPage = view[0];
         if (this.currentLeftPage < 3) {
           this.currentLeftLines = null;
         } else {
           this.currentLeftLines = this.pages[this.currentLeftPage - 3].lines;
         }
+        // generate right notes
         this.currentRightPage = view[1];
         if (this.currentRightPage < 3) {
           this.currentRightLines = null;
         } else {
           this.currentRightLines = this.pages[this.currentRightPage - 3].lines;
         }
-        console.log(this.pages[5]);
+        // move bookmark
+        axios
+          .patch(
+            "http://localhost:3000/v1/books/" +
+              this.bookId +
+              "/mark/" +
+              this.currentRightPage
+          )
+          .then(function(response) {
+            console.log(response.data);
+          })
+          .catch(function(error) {
+            console.log("error. check backend");
+          });
       }.bind(this)
     );
     // Build the book
@@ -102,6 +117,7 @@ var app = new Vue({
         });
         // add closing page
         $("#flipbook").turn("addPage", $("<div class='hard'/>").html(""));
+        // flip to last read page
         axios
           .get("http://localhost:3000/v1/books/" + this.bookId + "/mark")
           .then(function(response) {
