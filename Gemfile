@@ -21,6 +21,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'knock'
 gem 'unirest'
 
+gem 'google-cloud-vision'
+gem 'paperclip', "~> 5.1"
+gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
