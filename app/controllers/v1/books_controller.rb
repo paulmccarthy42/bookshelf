@@ -1,3 +1,6 @@
+require 'google/cloud/vision'
+
+
 class V1::BooksController < ApplicationController
   def index
     books = Book.all
@@ -62,6 +65,7 @@ class V1::BooksController < ApplicationController
     render json: books.as_json
   end
 
+  # need to make user specific
   def bookmark_check
     bookmarked_page_number = 0
     selections = BookSelection.where(book_id: params[:id])
@@ -72,6 +76,7 @@ class V1::BooksController < ApplicationController
     render json: { bookmarked_page_number: bookmarked_page_number}
   end
 
+  # need to make user specific
   def bookmark_move
     book = Book.find_by(id: params[:id])
     selections = BookSelection.where(book_id: params[:id])
@@ -83,6 +88,16 @@ class V1::BooksController < ApplicationController
     else
       render json: "do not want"
     end
+  end
+
+  def upload
+    image_file_path = params[:image_file_path]
+    project_id = ENV['PROJECT_ID']
+    keyfile = "./My First Project-40b1a0cb81bb.json"
+    vision = Google::Cloud::Vision.new project: project_id, keyfile: keyfile
+    words = vision.image(image_file_path).text
+    render json: words
+
   end
 end
 
