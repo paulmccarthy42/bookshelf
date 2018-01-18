@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get "pages/read" => "pages#read"
     get "/pages/:id" => "pages#show"
 
+    get "/books/upload" => "books#upload"
     get "/books" => "books#index"
     get "/books/check" => "books#check"
     get "/books/search" => "books#search"
