@@ -246,11 +246,32 @@ var SearchBookPage = {
   },
   methods: {
     uploadFile: function(event) {
-      console.log("hello");
+      console.log(event.target.files[0]);
       if (event.target.files.length > 0) {
-        var formData = new FormData();
-        formData.append("image", event.target.files[0]);
+        var fileCreated = new FormData();
+        fileCreated.append("image", event.target.files[0]);
+        axios
+          .post("v1/images", fileCreated)
+          .then(
+            function(response) {
+              console.log(response.data.grpc.description);
+              this.OCRText = response.data.grpc.description;
+            }.bind(this)
+          )
+          .catch(function(error) {
+            console.log("fatal error. please try again");
+          });
       }
+    },
+    test: function() {
+      axios
+        .get("/v1/books/upload?path=" + "./public/assets/img/LOGO.png")
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   computed: {}

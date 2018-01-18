@@ -372,14 +372,35 @@
 </template>
 
 <template id="search-book-page">
-  <div style="padding-left: 100px;">
-    <div v-for="book in booksOnfile">
-      <p><strong>{{book.title}}</strong> by {{book.author}}</p>
-    </div>
-    <textarea v-model="OCRText"></textarea>
-    <input type="file" id="ocr_upload" v-on:change="uploadFile($event)">
-    <!-- <input type="button" value="submit" v:on-click="submit"> -->
-    <p>test: </p>
+  <div>
+    <section class="box-intro bg-film">
+        <div class="table-cell box-intro bg-film">
+
+            <!-- <h3 class="box-headline letters rotate-2">
+                <span class="box-words-wrapper">
+                    <b class="is-visible">CLEAN &nbsp;&amp;&nbsp; CREATIVE.</b>
+                    <b>&nbsp;SIMPLE &nbsp;&amp;&nbsp; POWERFUL.</b>
+                </span>
+            </h3> -->
+            <h1>SHELF</h1>
+        </div>
+        <!-- <div class="mouse">
+            <div class="scroll"></div>
+        </div> -->
+      </section>
+
+      <section>
+        <div style="padding-left: 100px;">
+          <div v-for="book in booksOnfile">
+            <p><strong>{{book.title}}</strong> by {{book.author}}</p>
+          </div>
+          <textarea v-model="OCRText"></textarea>
+          <input type="file" id="ocr_upload" v-on:change="uploadFile($event)">
+          <!-- <input type="button" value="submit" v:on-click="submit"> -->
+          <p>test: </p>
+          <button v-on:click="test">testing connection to google</button>
+        </div>
+    </section>
   </div>
 </template>
 

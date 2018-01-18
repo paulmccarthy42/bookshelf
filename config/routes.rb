@@ -27,5 +27,8 @@ Rails.application.routes.draw do
     post "/book_selections" => "book_selections#create"
 
     post "/comments" => "comments#create"
+
+    get "images" => "images#index"
+    post "/images" => "images#create"
   end
 end

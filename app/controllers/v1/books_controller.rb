@@ -91,11 +91,12 @@ class V1::BooksController < ApplicationController
   end
 
   def upload
-    image_file_path = params[:image_file_path]
+    path = params[:path]
     project_id = ENV['PROJECT_ID']
-    keyfile = "./My First Project-40b1a0cb81bb.json"
+    keyfile = "./credentials.json"
     vision = Google::Cloud::Vision.new project: project_id, keyfile: keyfile
-    words = vision.image(image_file_path).text
+    p params
+    words = vision.image(path).text
     render json: words
 
   end
