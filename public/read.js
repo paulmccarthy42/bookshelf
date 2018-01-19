@@ -10,6 +10,7 @@ var router = new VueRouter({
 var app = new Vue({
   el: "#app",
   router: router,
+
   data: function() {
     return {
       bookId: parseInt(this.$route.params.id),
@@ -24,6 +25,7 @@ var app = new Vue({
       acc: document.getElementsByClassName("accordion")
     };
   },
+
   created: function() {
     // check if logged in
     var jwt = localStorage.getItem("jwt");
@@ -31,6 +33,7 @@ var app = new Vue({
       axios.defaults.headers.common["Authorization"] = jwt;
     }
   },
+
   mounted: function() {
     // Create the turn book
     console.log("hello", $("#flipbook"));
@@ -131,14 +134,19 @@ var app = new Vue({
       }.bind(this)
     );
   },
+
   methods: {
     bookmark: function() {
       console.log(this.acc);
     },
-    accordionOut: function(index) {
+
+    accordionOut: function(index, side) {
+      if (side === "right") {
+        index += 40;
+      }
       this.comment = "";
       console.log(this.acc);
-      var button = this.acc[index + 40];
+      var button = this.acc[index];
       button.classList.toggle("active");
 
       var panel = button.nextElementSibling;
@@ -148,6 +156,7 @@ var app = new Vue({
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
     },
+
     addComment: function(lineId) {
       var params = {};
       params.comment = this.comment;
