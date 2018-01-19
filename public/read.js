@@ -183,11 +183,6 @@ var app = new Vue({
                 }
               });
             }
-
-            // look for the correct line on the left page
-            // look for the correct line on the right page
-
-            // correctLine.comments.push(response.data);
             this.comment = "";
           }.bind(this)
         )
