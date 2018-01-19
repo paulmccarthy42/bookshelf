@@ -36,7 +36,7 @@
   <div id="app">
      <span class="frame-line top-frame visible-lg"></span>
     <span class="frame-line right-frame visible-lg"></span>
-    <span class="frame-line bottom-frame visible-lg"></span>
+    <!-- <span class="frame-line bottom-frame visible-lg"></span> -->
     <span class="frame-line left-frame visible-lg"></span>
 
     <header class="main-header">
@@ -389,16 +389,28 @@
         </div> -->
       </section>
 
-      <section>
+      <section class="project_descr">
         <div style="padding-left: 100px;">
+          <div><h1>Books already on file</h1>
           <div v-for="book in booksOnfile">
             <p><strong>{{book.title}}</strong> by {{book.author}}</p>
           </div>
-          <textarea v-model="OCRText"></textarea>
-          <input type="file" id="ocr_upload" v-on:change="uploadFile($event)">
-          <!-- <input type="button" value="submit" v:on-click="submit"> -->
-          <p>test: </p>
-          <button v-on:click="test">testing connection to google</button>
+          </div>
+          <h1>Upload a new Text</h1>
+          <div v-if="OCRText!==''">
+            <textarea v-model="OCRText"></textarea>
+            <div>Book title: <input type="text" placeholder="title"></div>
+            <div>Author: <input type="text" placeholder="first name first"></div>
+            <div>Genre: <input type="text" placeholder="maybe a dropdown?"></div>
+            <div>Language: <input type="text" placeholder="def a dropdown"></div>
+            <div>Year Published: <input type="number" placeholder="maybe a better approach"></div>
+
+            <button v-on:click="submitBook">submit</button>
+          </div>
+          <div v-else>
+            <h2>Select a picture to get your book started</h2>
+            <input type="file" id="ocr_upload" v-on:change="uploadFile($event)">
+          </div>
         </div>
     </section>
   </div>
