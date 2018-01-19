@@ -8,7 +8,7 @@ class BookSelection < ApplicationRecord
       book_id: book_id,
       book_title: book.title,
       book_shelf_id: book_shelf_id,
-      bookmarked_page_id: bookmarked_page_id
+      bookmarked_page_number: bookmarked_page_number
     }
   end
 end

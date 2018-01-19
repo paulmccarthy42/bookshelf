@@ -73,8 +73,9 @@ class V1::BooksController < ApplicationController
 
   # need to make user specific
   def bookmark_check
+    current_bookshelves = BookShelf.where(user_id: current_user.id)
     bookmarked_page_number = 0
-    selections = BookSelection.where(book_id: params[:id])
+    selections = BookSelection.where(book_id: params[:id]).select {|selection| current_bookshelves.include?(selection.book_shelf)}
     if selections[0]
       bookmarked_page_number = selections[0].bookmarked_page_number
     end
