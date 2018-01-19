@@ -36,6 +36,7 @@ class V1::BooksController < ApplicationController
   end
 
   def create
+    p params
     book = Book.new
     book.title = params["title"]
     book.author = params["author"]
@@ -44,8 +45,13 @@ class V1::BooksController < ApplicationController
     book.published_year = params["published_year"]
     book.gutenberg_id = params["gutenberg_id"]
     if book.save
-      pages = book.generate_pages(book.gutenberg_id, book.id)
-      if pages.all? {|page| page.save}
+      if book.gutenberg_id != nil
+        saveables = book.generate_pages_with_gutenberg(book.gutenberg_id, book.id)
+      else
+        saveables = book.generate_ocr_pages(params[:OCRText])
+        p params[:OCRText]
+      end
+      if saveables.all? {|saveable| saveable.save}
         #move to error reporting
         render json: "success baby"
       else

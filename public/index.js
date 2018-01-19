@@ -232,7 +232,8 @@ var SearchBookPage = {
       booksOnfile: [],
       bookInfo: {},
       errors: [],
-      OCRText: ""
+      OCRText: "",
+      newBook: {}
     };
   },
   created: function() {
@@ -264,7 +265,18 @@ var SearchBookPage = {
         //   });
       }
     },
-    submitBook: function() {}
+    submitBook: function() {
+      console.log(this.newBook);
+      this.newBook.OCRText = this.OCRText;
+      axios
+        .post("/v1/books", this.newBook)
+        .then(function(response) {
+          console.log(response.data);
+        })
+        .catch(function(errors) {
+          console.log(errors);
+        });
+    }
   },
   computed: {}
 };
