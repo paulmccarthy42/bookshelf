@@ -391,12 +391,12 @@
 
       <section class="project_descr">
         <div style="padding-left: 100px;">
-          <div><h1>Books already on file</h1>
+          <div><h1>Read a text we already have</h1>
           <div v-for="book in booksOnfile">
-            <p><strong>{{book.title}}</strong> by {{book.author}}</p>
+            <p><strong><a v-bind:href="'#/book/' + book.id">{{book.title}}</a></strong> by {{book.author}}</p>
           </div>
           </div>
-          <h1>Upload a new Text</h1>
+          <h1>Upload a new text</h1>
           <div v-if="OCRText!==''">
             <textarea v-model="OCRText"></textarea>
             <div>Book title: <input type="text" placeholder="title" v-model="newBook.title"></div>
@@ -408,7 +408,7 @@
             <button v-on:click="submitBook">submit</button>
           </div>
           <div v-else>
-            <h2>Select a picture to get your book started</h2>
+            <h2>Select a scan to get your book started</h2>
             <input type="file" id="ocr_upload" v-on:change="uploadFile($event)">
           </div>
         </div>
