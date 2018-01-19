@@ -133,21 +133,12 @@ var app = new Vue({
   },
   methods: {
     bookmark: function() {
-      var test = 0;
-      this.currentRightLines.forEach(function(line) {
-        if (line.id === 22) {
-          test = line.line_number;
-        } else {
-          console.log(line.id);
-        }
-      });
-      console.log(test);
-      console.log(this.currentRightLines);
+      console.log(this.acc);
     },
     accordionOut: function(index) {
       this.comment = "";
       console.log(this.acc);
-      var button = this.acc[index];
+      var button = this.acc[index + 40];
       button.classList.toggle("active");
 
       var panel = button.nextElementSibling;
