@@ -7,19 +7,17 @@ Read page with options
 HOME PAGE:
 Mostly done, need to
 
-* filter book section
 * debug add book
-* figure out that filler
-* maybe add book search
 
 BOOK SUMMARY PAGE
 Mostly done, need to
 
-* do subcomments, adding comments
 * figure out comment styling
 * figure out visuals for read, shelve buttons
 * pick a prety picture
 
 BOOK READ PAGE
 
-* comments/links
+* styling for comments
+
+- test uploading and reading book end to end on something longer than 3 lines
