@@ -133,9 +133,19 @@ var app = new Vue({
   },
   methods: {
     bookmark: function() {
-      console.log("bookmark on", this.currentRightPage);
+      var test = 0;
+      this.currentRightLines.forEach(function(line) {
+        if (line.id === 22) {
+          test = line.line_number;
+        } else {
+          console.log(line.id);
+        }
+      });
+      console.log(test);
+      console.log(this.currentRightLines);
     },
     accordionOut: function(index) {
+      this.comment = "";
       console.log(this.acc);
       var button = this.acc[index];
       button.classList.toggle("active");
@@ -152,13 +162,32 @@ var app = new Vue({
       params.comment = this.comment;
       params.id = lineId;
       params.commented = "Line";
-      console.log(lineId);
       axios
         .post("v1/comments", params)
         .then(
           function(response) {
-            // find the right comment
-            this.info.comments.push(response.data);
+            var patched = false;
+            if (this.currentRightLines.length > 0) {
+              this.currentRightLines.forEach(function(line) {
+                if (line.id === lineId) {
+                  patched = true;
+                  line.comments.push(response.data);
+                }
+              });
+            }
+            if (this.currentLeftLines.length > 0 && !patched) {
+              this.currentLeftLines.forEach(function(line) {
+                if (line.id === lineId) {
+                  patched = true;
+                  line.comments.push(response.data);
+                }
+              });
+            }
+
+            // look for the correct line on the left page
+            // look for the correct line on the right page
+
+            // correctLine.comments.push(response.data);
             this.comment = "";
           }.bind(this)
         )
