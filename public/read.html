@@ -39,6 +39,7 @@
         <button class="accordion" v-on:click="accordionOut(currentLeftLines.indexOf(line))">Section 1 <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
         <div class="panel">
           <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
+          <div><input type="text"><a><button>add a comment</button></a></div>
         </div>
       </div>
     </div>
@@ -53,6 +54,10 @@
         <button class="accordion" v-on:click="accordionOut(currentRightLines.indexOf(line))">Section 1 <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
         <div class="panel">
           <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
+          <div><input type="text" v-model="comment"><a v-on:click="addComment(line.id)" ><button>add a comment</button></a></div>
+
+
+
         </div>
       </div>
       <!-- <div v-for="line in currentRightLines">
@@ -62,7 +67,6 @@
   <div class="toolbar-read-page">
     <a href="/"><button >back</button></a>
     <a v-on:click="bookmark"><button >Bookmark page</button></a>
-    <a v-on:click="spritz"><button>Spritz</button></a>
     
   </div>
 

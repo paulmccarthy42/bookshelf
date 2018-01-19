@@ -20,6 +20,7 @@ var app = new Vue({
       currentRightPage: 1,
       currentLeftLines: [],
       currentRightLines: [],
+      comment: "",
       acc: document.getElementsByClassName("accordion")
     };
   },
@@ -146,18 +147,24 @@ var app = new Vue({
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
     },
-    spritz: function() {
-      var script = document.createElement("script");
-
-      script.setAttribute(
-        "src",
-        "https://sdk.spritzinc.com/bookmarklet/latest/js/SpritzletOuter.js"
-      );
-      script.onload = function() {
-        console.log(script.run);
-      };
-
-      document.head.appendChild(script);
+    addComment: function(lineId) {
+      var params = {};
+      params.comment = this.comment;
+      params.id = lineId;
+      params.commented = "Line";
+      console.log(lineId);
+      axios
+        .post("v1/comments", params)
+        .then(
+          function(response) {
+            // find the right comment
+            this.info.comments.push(response.data);
+            this.comment = "";
+          }.bind(this)
+        )
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 });

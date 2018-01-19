@@ -271,6 +271,10 @@ var SearchBookPage = {
         .post("/v1/books", this.newBook)
         .then(function(response) {
           console.log(response.data);
+          this.OCRText = "";
+          this.newBook = {};
+          this.booksOnfile.push(response.data);
+          // UNTESTED
         })
         .catch(function(errors) {
           console.log(errors);

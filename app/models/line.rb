@@ -5,6 +5,7 @@ class Line < ApplicationRecord
 
   def as_json
     {
+      id: id,
       page_id: page_id,
       line_number: line_number,
       text: text,
