@@ -143,7 +143,7 @@ var app = new Vue({
     },
 
     accordionOut: function(index, side) {
-      if (side === "right") {
+      if (side === "right" && this.currentLeftLines !== null) {
         index += 40;
       }
       this.comment = "";
