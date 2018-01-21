@@ -17,10 +17,11 @@ class User < ApplicationRecord
 
   def as_json
     {
+      id: id,
       name: name,
       role: role,
       email: email,
-      last_read_book: last_read_book
+      last_read_book: last_read_book.as_json
     }
   end
 end
