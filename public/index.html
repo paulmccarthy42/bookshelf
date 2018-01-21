@@ -303,16 +303,16 @@
 <!-- Summary for a book -->
 <template id="book-page">
   <div>
-    <div class="site-hero_2">
-        <!-- <img v-bind:src="info.cover_image"> -->
-      <div class="section-overlay">
+    <section class="box-intro bg-film" >
+      <div class="table-cell box-intro bg-film" style="background-image: url(assets/img/bookcover.jpg);">
       </div>
-      <div class="page-title">
+      <div class="mouse">
+          <div class="scroll"></div>
       </div>
-    </div>
+    </section>
 
     <section class="project_descr">
-    <!-- <div class="container mt-100"> -->
+    <div class="container mt-100">
       <div class="row center">
       <div class="col-md-8 col-md-offset-2 col-sm-12">
         <div class="section-title">
@@ -326,7 +326,7 @@
           <button v-on:click="shelveABook">add to shelf</button>
         </div>
       </div>
-      <!-- </div> -->
+      </div>
 
       <div class="row mt-50">
         <div class="col-md-9 wow fadeInUp ">
@@ -346,6 +346,7 @@
             </div>
         </div>
         </div>
+        
         <div class="col-md-3 wow fadeInUp" data-wow-delay=".1s">
           <ul class="project_list">
             <li>English language</li>
@@ -359,15 +360,13 @@
       </div>
 
     </div><!-- end container -->
-  <div>
-    <div class="site-hero_3">
-      <div class="section-overlay">
+  <section class="box-intro bg-film" >
+      <div class="table-cell box-intro bg-film" style="background-image: url(assets/img/bookcover.jpg);">
       </div>
-      <div class="page-title">
+      <div class="mouse">
+          <div class="scroll"></div>
       </div>
-    </div>
-  </section>
-  </div>
+    </section>
 </template>
 
 <template id="search-book-page">
