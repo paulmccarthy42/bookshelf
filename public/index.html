@@ -56,13 +56,26 @@
               <li class="box-label">Shelf</li>
 
               <li><a href="/#/">Home</a> <i class="lnr lnr-home"></i></li>
-              <li><a href="#/login">Browse Books</a></li>
+              <li><a href="#/book/search">Browse Books</a></li>
               <div v-if="signedIn">
-              <li><a href="#/logout">Log Out</a></li>
+                <li><a href="#/logout">Log Out</a></li>
               </div>
               <div v-else>
-              <li><a href="#/login" >Log In</a></li>
-              <li><a href="#/sign_up">Sign Up New User</a></li>
+                <li>
+                  <ul>
+                    <li class="text-danger" v-for="error in errors">{{ error }}</li>
+                  </ul>
+                  <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" v-model="email">
+                  </div>
+                  <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" class="form-control" v-model="password">
+                  </div>
+                </li>
+                <li><a v-on:click="submit" >Log In</a></li>
+                <li><a href="#/sign_up">Sign Up New User</a></li>
               </div>
           </ul>
         </nav>

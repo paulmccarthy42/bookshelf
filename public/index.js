@@ -394,24 +394,49 @@ var router = new VueRouter({
 var app = new Vue({
   el: "#app",
   router: router,
+  data: function() {
+    return { email: "", password: "", errors: [] };
+  },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
   },
-  data: function() {
-    return {
-      searchTerm: ""
-    };
-  },
+
   methods: {
-    search: function() {
-      router.push("/book/search?title=" + this.searchTerm);
-      this.searchTerm = "";
-    },
     test: function() {
       console.log(this.signedIn);
+    },
+    signup: function() {
+      axios
+        .post("v1/users", this.newUser)
+        .then(function(response) {
+          router.push("/login");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.errors);
+        });
+    },
+    submit: function() {
+      var params = {
+        auth: { email: this.email, password: this.password }
+      };
+      axios
+        .post("/user_token", params)
+        .then(function(response) {
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.jwt;
+          localStorage.setItem("jwt", response.data.jwt);
+          router.push("/");
+        })
+        .catch(
+          function(error) {
+            this.errors = ["Invalid email or password."];
+            this.email = "";
+            this.password = "";
+          }.bind(this)
+        );
     }
   },
   computed: {
