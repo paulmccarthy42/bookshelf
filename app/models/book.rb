@@ -3,6 +3,7 @@ class Book < ApplicationRecord
   has_many :book_shelves, through: :book_selections
   has_many :comments, as: :commentable
   has_many :pages
+  has_many :images
 
   def pages
     Page.all.where(book_id: id).sort{|page1, page2| page1.page_number <=> page2.page_number}
@@ -74,6 +75,12 @@ class Book < ApplicationRecord
     return line_list
   end
 
+  def cover_image
+    images.find_by(cover: true) ? 
+      images.find_by(cover: true).image 
+      : nil
+  end
+
   def as_json
     {
       id: id,
@@ -83,7 +90,8 @@ class Book < ApplicationRecord
       language: language,
       published_year: published_year,
       pages: pages.length,
-      comments: comments.as_json
+      comments: comments.as_json,
+      cover_image: cover_image
     }
   end
 end

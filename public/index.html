@@ -176,12 +176,11 @@
           <div class="col-md-8 col-md-offset-2">
             <img src="assets/img/shelf.png" alt="Khaki HTML Template" width="300">
             <div class="km-space"></div>
-            <h1 class="lead">{{message}}</h1>
             <div v-if="message === 'Please log in'">
               <a class="btn btn-success" href="#/login" >Log In</a> <!--  -->
               <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
             </div>
-            <h2>Text explaining purpose of site</h2>
+            <h1>Text explaining purpose of site</h1>
             <div v-if="signedIn()">Last Book: {{currentUser.last_read_book}}</div>
           </div>
         </div><!-- description text -->
@@ -246,7 +245,7 @@
             <!-- books -->
             <div class="col-md-4" v-for="book in books" v-bind:class="book.shelf">
               <a v-bind:href="'#/book/' + book.id" class="portfolio_item work-grid">
-                <img src="assets/img/work-1.jpg" alt="image">
+                <img v-bind:src="book.cover_image" alt="image">
                 <div class="portfolio_item_hover">
                   <div class="item_info">
                     <span>{{book.title}}</span>
@@ -305,7 +304,9 @@
 <template id="book-page">
   <div class="container">
     <div class="site-hero_2">
-      <div class="section-overlay"></div>
+        <!-- <img v-bind:src="info.cover_image"> -->
+      <div class="section-overlay">
+      </div>
       <div class="page-title">
       </div>
     </div>
@@ -352,6 +353,7 @@
             <li>Published in {{info.published_year}}</li>
             <li>{{info.comments.length}} Comments</li>
             <li>{{info.comments.length}} Public Resources Posted</li>
+            <li>{{info.cover_image}}</li>
           </ul>
         </div>
       </div>
