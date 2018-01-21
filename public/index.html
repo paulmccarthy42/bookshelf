@@ -181,7 +181,8 @@
               <a class="btn btn-success" href="#/login" >Log In</a> <!--  -->
               <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
             </div>
-            <div v-if="signedIn()">Last Book</div>
+            <h2>Text explaining purpose of site</h2>
+            <div v-if="signedIn()">Last Book: {{currentUser.last_read_book}}</div>
           </div>
         </div><!-- description text -->
       </div>
@@ -199,14 +200,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col-lg-6 right col-full right-0">
-            <i class="lnr lnr-rocket"></i>
-            <h6>unlimited options</h6>
-            <p>Quisque eget hendrerit eros, ut interdum magna.
-              <br>Donec urna ante, lobortis nec dictum eget, porta non turpis.
-            </p>
-          </div>-->
       </div>
     </section>
 

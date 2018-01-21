@@ -19,7 +19,7 @@ var HomePage = {
         function(response) {
           this.currentUser = response.data;
           this.message += this.currentUser.name;
-          // console.log(this.currentUser);
+          console.log(this.currentUser);
           axios.get("/v1/book_shelves").then(
             function(response) {
               var shelves = response.data;
