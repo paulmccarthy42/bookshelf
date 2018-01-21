@@ -178,7 +178,7 @@
             <div class="km-space"></div>
             <h1 class="lead">{{message}}</h1>
             <div v-if="message === 'Please log in'">
-              <a class="btn btn-success" v-on:click="signedIn" >Log In</a> <!-- href="#/login" -->
+              <a class="btn btn-success" href="#/login" >Log In</a> <!--  -->
               <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
             </div>
             <div v-if="signedIn()">Last Book</div>
