@@ -56,19 +56,14 @@
               <li class="box-label">Shelf</li>
 
               <li><a href="/#/">Home</a> <i class="lnr lnr-home"></i></li>
-              <li><a href="services.html">services</a></li>
-              <li><a href="single-project.html">single project</a></li>
-              <li><a href="#/login">Log In</a></li>
+              <li><a href="#/login">Browse Books</a></li>
+              <div v-if="signedIn">
               <li><a href="#/logout">Log Out</a></li>
+              </div>
+              <div v-else>
+              <li><a href="#/login" >Log In</a></li>
               <li><a href="#/sign_up">Sign Up New User</a></li>
-              <li><a href="contact.html">contact</a></li>
-              <li>
-                <!-- FOR THE LOVE OF ALL THAT'S HOLY, MOVE THIS -->
-                <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Find Book by Title" aria-label="Search" v-model="searchTerm">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" v-on:click="search">Search</button>
-                </form> 
-              </li>
+              </div>
           </ul>
         </nav>
       </div>

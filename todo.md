@@ -4,11 +4,6 @@ Prolly move sign in stuff to modals
 Individual book page
 Read page with options
 
-HOME PAGE:
-Mostly done, need to
-
-* debug add book
-
 BOOK SUMMARY PAGE
 Mostly done, need to
 

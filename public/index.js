@@ -409,6 +409,18 @@ var app = new Vue({
     search: function() {
       router.push("/book/search?title=" + this.searchTerm);
       this.searchTerm = "";
+    },
+    test: function() {
+      console.log(this.signedIn);
+    }
+  },
+  computed: {
+    signedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 });
