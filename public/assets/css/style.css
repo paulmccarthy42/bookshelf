@@ -1668,6 +1668,7 @@ footer a:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
     z-index: 1;
+    visibility: hidden;
 }
 
 .team h3 {
