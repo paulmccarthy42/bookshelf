@@ -78,6 +78,10 @@ var HomePage = {
         return shelf.id === shelfID;
       });
       this.bookshelves[shelfIndex] = true;
+    },
+    signedIn: function() {
+      console.log(this.$parent.$data.signedIn);
+      return this.$parent.$data.signedIn;
     }
   },
   computed: {}

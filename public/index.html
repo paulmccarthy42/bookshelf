@@ -178,16 +178,16 @@
             <div class="km-space"></div>
             <h1 class="lead">{{message}}</h1>
             <div v-if="message === 'Please log in'">
-              <a class="btn btn-success" v-on:click="toggleHeader">Log In</a>
+              <a class="btn btn-success" v-on:click="signedIn" >Log In</a> <!-- href="#/login" -->
               <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
             </div>
-            <div v-if="message !== 'Please log in'">Last Book</div>
+            <div v-if="signedIn()">Last Book</div>
           </div>
         </div><!-- description text -->
       </div>
     </section>
 
-    <section id="services" class="services mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background"  style="background-image: url(assets/img/services.jpg);">
+    <section  v-if="signedIn()" id="services" class="services mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background"  style="background-image: url(assets/img/services.jpg);">
       <div class="section-overlay"></div>
       <div class="container">
         <div class="row center">
@@ -211,7 +211,7 @@
       </div>
     </section>
 
-    <section class="portfolio">
+    <section class="portfolio" v-if="signedIn()">
       <div class="top-right-separator hidden-xs"></div>
       <div class="container">
         <div class="col-md-8 col-md-offset-2 col-sm-12">
@@ -274,7 +274,7 @@
       </div>
       <!-- end container -->
     </section>
-    <section>  
+    <section v-if="signedIn()">  
       <p>last notes</p>
     </section>
     </div>
