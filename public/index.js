@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios, initalizeTheme */
+/* global Vue, VueRouter, axios, initalizeTheme, $ */
 
 var HomePage = {
   template: "#home-page",
@@ -78,8 +78,7 @@ var HomePage = {
         return shelf.id === shelfID;
       });
       this.bookshelves[shelfIndex] = true;
-    },
-    filterBookData: function() {}
+    }
   },
   computed: {}
 };
@@ -395,16 +394,41 @@ var app = new Vue({
   el: "#app",
   router: router,
   data: function() {
-    return { email: "", password: "", errors: [] };
+    return { email: "", password: "", errors: [], signedIn: false };
   },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
+      this.signedIn = true;
     }
   },
 
   methods: {
+    toggleHeader: function() {
+      $(".box-menu-icon").toggleClass("is-clicked");
+      $(".box-header").toggleClass("menu-is-open");
+
+      if ($(".box-primary-nav").hasClass("is-visible")) {
+        $(".box-primary-nav")
+          .removeClass("is-visible")
+          .one(
+            "webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",
+            function() {
+              $("body").removeClass("overflow-hidden");
+            }
+          );
+      } else {
+        $(".box-primary-nav")
+          .addClass("is-visible")
+          .one(
+            "webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",
+            function() {
+              $("body").addClass("overflow-hidden");
+            }
+          );
+      }
+    },
     test: function() {
       console.log(this.signedIn);
     },
@@ -428,6 +452,7 @@ var app = new Vue({
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
+          this.signedIn = true;
           router.push("/");
         })
         .catch(
@@ -437,15 +462,6 @@ var app = new Vue({
             this.password = "";
           }.bind(this)
         );
-    }
-  },
-  computed: {
-    signedIn: function() {
-      if (localStorage.getItem("jwt")) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 });

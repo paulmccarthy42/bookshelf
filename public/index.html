@@ -46,7 +46,7 @@
                 <a href="/#/"><img src="assets/img/read.png" width="80" alt="Logo"></a>
             </div>
             <!-- box-nav -->
-            <a class="box-primary-nav-trigger" href="/#/">
+            <a class="box-primary-nav-trigger">
                 <span class="box-menu-icon"></span>
             </a>
             <!-- box-primary-nav-trigger -->
@@ -55,10 +55,10 @@
           <ul class="box-primary-nav">
               <li class="box-label">Shelf</li>
 
-              <li><a href="/#/">Home</a> <i class="lnr lnr-home"></i></li>
-              <li><a href="#/book/search">Browse Books</a></li>
+              <li><a href="/#/" v-on:click="toggleHeader">Home</a> <i class="lnr lnr-home"></i></li> 
+              <li><a href="#/book/search" v-on:click="toggleHeader">Browse Books</a></li>
               <div v-if="signedIn">
-                <li><a href="#/logout">Log Out</a></li>
+                <li><a href="#/logout" v-on:click="toggleHeader">Log Out</a></li>
               </div>
               <div v-else>
                 <li>
@@ -74,8 +74,8 @@
                     <input type="password" class="form-control" v-model="password">
                   </div>
                 </li>
-                <li><a v-on:click="submit" >Log In</a></li>
-                <li><a href="#/sign_up">Sign Up New User</a></li>
+                <li><a v-on:click="submit" v-on:click="toggleHeader">Log In</a></li>
+                <li><a href="#/sign_up" v-on:click="toggleHeader">Sign Up New User</a></li>
               </div>
           </ul>
         </nav>
@@ -178,7 +178,7 @@
             <div class="km-space"></div>
             <h1 class="lead">{{message}}</h1>
             <div v-if="message === 'Please log in'">
-              <a class="btn btn-success" href="#/login">Log In</a>
+              <a class="btn btn-success" v-on:click="toggleHeader">Log In</a>
               <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
             </div>
             <div v-if="message !== 'Please log in'">Last Book</div>
@@ -310,9 +310,6 @@
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
   </div>
 </template>
-
-<!-- Close up for specific bookshelf, maybe can be transitioned to a modal -->
-
 
 <!-- Summary for a book -->
 <template id="book-page">
