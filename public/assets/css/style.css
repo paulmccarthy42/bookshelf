@@ -2023,8 +2023,16 @@ footer a:hover {
     position: relative;
 }
 
+.site-hero_3 {
+    background: url("../img/bookcover bottom.jpg") no-repeat;
+    background-size: cover;
+    height: 600px;
+    width: 100%;
+    position: relative;
+}
+
 .site-hero_2 .page-title {
-    position: absolute;
+    background-image: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);

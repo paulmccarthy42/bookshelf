@@ -34,10 +34,10 @@
 
 <body class="animsition">
   <div id="app">
-     <span class="frame-line top-frame visible-lg"></span>
-    <span class="frame-line right-frame visible-lg"></span>
+     <!-- <span class="frame-line top-frame visible-lg"></span> -->
+    <!-- <span class="frame-line right-frame visible-lg"></span> -->
     <!-- <span class="frame-line bottom-frame visible-lg"></span> -->
-    <span class="frame-line left-frame visible-lg"></span>
+    <!-- <span class="frame-line left-frame visible-lg"></span> -->
 
     <header class="main-header">
       <div class='container-fluid'>
@@ -302,7 +302,7 @@
 
 <!-- Summary for a book -->
 <template id="book-page">
-  <div class="container">
+  <div>
     <div class="site-hero_2">
         <!-- <img v-bind:src="info.cover_image"> -->
       <div class="section-overlay">
@@ -312,7 +312,7 @@
     </div>
 
     <section class="project_descr">
-    <div class="container mt-100">
+    <!-- <div class="container mt-100"> -->
       <div class="row center">
       <div class="col-md-8 col-md-offset-2 col-sm-12">
         <div class="section-title">
@@ -326,10 +326,11 @@
           <button v-on:click="shelveABook">add to shelf</button>
         </div>
       </div>
-      </div>
+      <!-- </div> -->
 
       <div class="row mt-50">
         <div class="col-md-9 wow fadeInUp ">
+          <div>Description: {{info.description}}</div>
           <div class="comment" v-for="comment in info.comments">
             <strong>{{comment.comment_text}}</strong> by {{comment.author}}
             <div class="subcomment" v-for="subcomment in comment.subcomments">{{subcomment.comment_text}} by {{subcomment.author}}</div>
@@ -353,17 +354,18 @@
             <li>Published in {{info.published_year}}</li>
             <li>{{info.comments.length}} Comments</li>
             <li>{{info.comments.length}} Public Resources Posted</li>
-            <li>{{info.cover_image}}</li>
           </ul>
         </div>
       </div>
 
-      <div class="pages_pagination">
-        <a href="/#/" class="all"><i class="lnr lnr-menu"></i></a>
-        <a href="/#/" class="prev"><i class="lnr lnr-arrow-left"></i></a>
-        <a href="/#/" class="next"><i class="lnr lnr-arrow-right"></i></a>
-      </div>
     </div><!-- end container -->
+  <div>
+    <div class="site-hero_3">
+      <div class="section-overlay">
+      </div>
+      <div class="page-title">
+      </div>
+    </div>
   </section>
   </div>
 </template>

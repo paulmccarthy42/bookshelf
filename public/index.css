@@ -13,12 +13,12 @@ body {
 
 #flipbook {
   margin-top: 10px;
-  margin-left: 10px;
   border-color: black;
   border-width: 1px;
   position: relative;
-  /*width: 400px;
-  height: 300px;*/
+
+  width: 400px;
+  height: 300px;
 }
 
 #flipbook .page {
@@ -110,16 +110,18 @@ body {
   font-size: 6px;
 }
 
-.test {
+.flipbook-container {
   position: relative;
-  margin-left: 200px;
+  float: left;
+  margin-left: 50px;
 }
 
 .commentary-right {
   /*background-color: #e6e8ed;*/
 
-  width: 300px;
-  position: absolute;
+  width: 200px;
+  position: relative;
+  float: right;
   right: 16px;
   top: 10px;
   height: 700px;
@@ -127,8 +129,9 @@ body {
 
 .commentary-left {
   /*background-color: #e6e8ed;*/
-  width: 300px;
-  position: absolute;
+  width: 200px;
+  position: relative;
+  float: left;
   left: 16px;
   top: 10px;
   height: 700px;

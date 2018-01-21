@@ -131,6 +131,8 @@ var BookSummaryPage = {
   },
   mounted: function() {
     initalizeTheme();
+    console.log("hello");
+    $(".site-hero_2").css("background-image", "url(info.cover_image)");
   },
   methods: {
     shelveABook: function(bookId) {
