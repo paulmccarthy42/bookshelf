@@ -147,7 +147,7 @@ var app = new Vue({
   },
 
   methods: {
-    accordionOut: function(index, side) {
+    accordion: function(index, side) {
       if (side === "right" && this.currentLeftLines !== null) {
         index += 40;
       }
@@ -167,9 +167,23 @@ var app = new Vue({
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
     },
+    accordionIn: function(side) {
+      var startRange = 0;
+      if (side === "right") {
+        startRange += 40;
+      }
+      for (var i = 0; i < startRange + 40; i++) {
+        var button = this.acc[startRange + i];
+        button.classList.remove("active");
+        var panel = button.nextElementSibling;
+        panel.style.maxHeight = null;
+      }
+    },
     shrinkParent: function(direction) {
+      //this is called for some reason when you click the bottom note
       if (direction === "left") {
         if ($(".commentary-left").css("width") === "200px") {
+          this.accordionIn(direction);
           $(".commentary-left").css("width", "20px");
         } else {
           $(".commentary-left").css("width", "200px");
@@ -177,16 +191,13 @@ var app = new Vue({
       } else {
         if ($(".commentary-right").css("width") === "200px") {
           $(".commentary-right").css("width", "20px");
+          this.accordionIn(direction);
         } else {
           $(".commentary-right").css("width", "200px");
         }
       }
       this.hiddenComments[direction] = !this.hiddenComments[direction];
     },
-    hideAccordion: function() {},
-    // unshrink parent on accordionOut being called
-    // accordion in on each when
-
     addComment: function(lineId) {
       var params = {};
       params.comment = this.comment;

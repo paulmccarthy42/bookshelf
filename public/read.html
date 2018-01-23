@@ -38,7 +38,7 @@
     <div class="commentary-left" v-if="currentLeftPage > 2">
       <button v-on:click="shrinkParent('left')" class="badge badge-pill badge-success shrinker-left"><</button>
       <div v-for="line in currentLeftLines" > <!-- class="accordion-holder" -->
-        <button class="accordion" v-on:click="accordionOut(currentLeftLines.indexOf(line), 'left')">{{line.line_number}} <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
+        <button class="accordion" v-on:click="accordion(currentLeftLines.indexOf(line), 'left')">{{line.line_number}} <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
         <div class="panel">
           <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
           <div><input type="text" v-model="comment"><a v-on:click="addComment(line.id)" ><button>add a comment</button></a></div>
@@ -57,7 +57,7 @@
     <div class="commentary-right">
       <button v-on:click="shrinkParent('right')" class="badge badge-pill badge-success shrinker-right">></button>
       <div v-for="line in currentRightLines">
-        <button class="accordion" v-on:click="accordionOut(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
+        <button class="accordion" v-on:click="accordion(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
         <div class="panel">
           <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
           <div><input type="text" v-model="comment"><a v-on:click="addComment(line.id)" ><button>add a comment</button></a></div>
