@@ -202,10 +202,11 @@ var app = new Vue({
       }
       for (var i = 0; i < startRange + 40; i++) {
         var button = this.acc[startRange + i];
-        button.classList.remove("active");
-        var panel = button.nextElementSibling;
-        console.log(i);
-        panel.style.maxHeight = null;
+        if (button) {
+          button.classList.remove("active");
+          var panel = button.nextElementSibling;
+          panel.style.maxHeight = null;
+        }
       }
     },
     shrinkParent: function(direction) {
