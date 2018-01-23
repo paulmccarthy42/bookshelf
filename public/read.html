@@ -35,7 +35,7 @@
     <script type="text/javascript" src="http://www.turnjs.com/lib/turn.min.js"></script>
   <div id = "app">
 
-    <div class="commentary-left" v-if="currentLeftPage > 2">
+    <div class="commentary commentary-left" v-if="currentLeftPage > 2">
       <button v-on:click="shrinkParent('left')" class="badge badge-pill badge-success shrinker-left"><</button>
       <div v-for="line in currentLeftLines" > <!-- class="accordion-holder" -->
         <button class="accordion" v-on:click="accordion(currentLeftLines.indexOf(line), 'left')">{{line.line_number}} <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div class="commentary-right">
+    <div class="commentary commentary-right">
       <button v-on:click="shrinkParent('right')" class="badge badge-pill badge-success shrinker-right">></button>
       <div v-for="line in currentRightLines">
         <button class="accordion" v-on:click="accordion(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>

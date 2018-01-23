@@ -116,26 +116,24 @@ body {
   margin-left: 50px;
 }
 
-.commentary-right {
-  /*background-color: #e6e8ed;*/
+.commentary {
+  background-color: #e6e8ed;
+  margin-top: 10px;
   width: 200px;
   position: relative;
-  float: right;
-  right: 1px;
-  /*top: 10px;*/
   height: 700px;
   transition: width 0.2s ease-out;
+  overflow-y: auto;
+}
+
+.commentary-right {
+  float: right;
+  right: 1px;
 }
 
 .commentary-left {
-  /*background-color: #e6e8ed;*/
-  width: 200px;
-  position: relative;
   float: left;
   left: 1px;
-  /*top: 10px;*/
-  height: 700px;
-  transition: width 0.2s ease-out;
 }
 
 .accordion-holder {
