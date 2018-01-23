@@ -109,16 +109,29 @@ var app = new Vue({
             .toggleClass("translation-hidden");
         });
         // Javascript to open comment on click
+        var that = this;
         $(".line-commented").click(function() {
-          var highlightedLineNumber = parseInt(
-            $(this)
-              .children(".line-number")
-              .html()
-          );
-
           // store line_number
+          var highlightedLineNumber = $(this)
+            .children(".line-number")
+            .html();
           // search acc for button that shares line number
-          // open it
+          console.log(highlightedLineNumber);
+
+          for (var x = 0; x < that.acc.length; x++) {
+            if (that.acc[x].innerHTML.split(" ")[0] === highlightedLineNumber) {
+              console.log(
+                "hello",
+                that.acc[x].innerHTML.split(" ")[0],
+                highlightedLineNumber
+              );
+              var indexOnPage = x % 40;
+              var side = indexOnPage === x ? "left" : "right";
+              that.accordion(indexOnPage, side);
+            }
+
+            // open it
+          }
         });
       }.bind(this)
     );
