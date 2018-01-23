@@ -156,7 +156,11 @@ body {
   overflow: hidden;
 }
 
-.accordion.shrunk span {
+.commentary.shrunk {
+  width: 20px;
+}
+
+.commentary.shrunk .accordion span {
   visibility: hidden;
 }
 

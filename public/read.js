@@ -203,7 +203,6 @@ var app = new Vue({
       for (var i = 0; i < startRange + 40; i++) {
         var button = this.acc[startRange + i];
         button.classList.remove("active");
-        button.classList.add("shrunk");
         var panel = button.nextElementSibling;
         panel.style.maxHeight = null;
       }
@@ -211,18 +210,14 @@ var app = new Vue({
     shrinkParent: function(direction) {
       //this is called for some reason when you click the bottom note
       if (direction === "left") {
-        if ($(".commentary-left").css("width") === "200px") {
+        $(".commentary-left").toggleClass("shrunk");
+        if (!$(".commentary-left").hasClass("shrunk")) {
           this.accordionIn(direction);
-          $(".commentary-left").css("width", "20px");
-        } else {
-          $(".commentary-left").css("width", "200px");
         }
       } else {
-        if ($(".commentary-right").css("width") === "200px") {
-          $(".commentary-right").css("width", "20px");
+        $(".commentary-right").toggleClass("shrunk");
+        if (!$(".commentary-right").hasClass("shrunk")) {
           this.accordionIn(direction);
-        } else {
-          $(".commentary-right").css("width", "200px");
         }
       }
       this.hiddenComments[direction] = !this.hiddenComments[direction];
