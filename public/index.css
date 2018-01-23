@@ -118,13 +118,13 @@ body {
 
 .commentary-right {
   /*background-color: #e6e8ed;*/
-
   width: 200px;
   position: relative;
   float: right;
-  right: 16px;
-  top: 10px;
+  right: 1px;
+  /*top: 10px;*/
   height: 700px;
+  transition: width 0.2s ease-out;
 }
 
 .commentary-left {
@@ -132,9 +132,14 @@ body {
   width: 200px;
   position: relative;
   float: left;
-  left: 16px;
-  top: 10px;
+  left: 1px;
+  /*top: 10px;*/
   height: 700px;
+  transition: width 0.2s ease-out;
+}
+
+.accordion-holder {
+  height: 15px;
 }
 
 .accordion {
@@ -147,8 +152,14 @@ body {
   text-align: left;
   outline: none;
   font-size: 10px;
-  height: 27px;
+  height: 15px;
   transition: 0.4s;
+  margin-top: 0.5px;
+  overflow: hidden;
+}
+
+.commentary-right div .accordion {
+  text-align: right;
 }
 
 .active,
@@ -183,4 +194,14 @@ body {
 
 .toolbar-read-page {
   text-align: center;
+}
+
+.shrinker-left {
+  position: absolute;
+  right: 1px;
+}
+
+.shrinker-right {
+  position: absolute;
+  left: 1px;
 }

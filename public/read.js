@@ -133,15 +133,19 @@ var app = new Vue({
           .catch(function(error) {
             $("#flipbook").turn("page", 0);
           });
+        $(".line").hover(
+          function() {
+            $(this).css("background-color", "rgba(252, 244, 201, .5)");
+          },
+          function() {
+            $(this).css("background-color", "white");
+          }
+        );
       }.bind(this)
     );
   },
 
   methods: {
-    bookmark: function() {
-      console.log(this.acc);
-    },
-
     accordionOut: function(index, side) {
       if (side === "right" && this.currentLeftLines !== null) {
         index += 40;
@@ -156,6 +160,31 @@ var app = new Vue({
         panel.style.maxHeight = null;
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+      var holder = button.parentElement;
+      holder.style.height =
+        (
+          parseInt(panel.style.maxHeight) +
+          parseInt(button.style.maxHeight) +
+          15
+        ).toString() + "px";
+      console.log("Holder", holder.style);
+      console.log("Panel", panel.style);
+      console.log("Button", button.style);
+    },
+    shrinkParent: function(direction) {
+      if (direction === "left") {
+        if ($(".commentary-left").css("width") === "200px") {
+          $(".commentary-left").css("width", "20px");
+        } else {
+          $(".commentary-left").css("width", "200px");
+        }
+      } else {
+        if ($(".commentary-right").css("width") === "200px") {
+          $(".commentary-right").css("width", "20px");
+        } else {
+          $(".commentary-right").css("width", "200px");
+        }
       }
     },
 
