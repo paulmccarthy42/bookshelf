@@ -150,10 +150,14 @@ body {
   text-align: left;
   outline: none;
   font-size: 10px;
-  height: 15px;
+  height: 27px;
   transition: 0.4s;
   margin-top: 0.5px;
   overflow: hidden;
+}
+
+.accordion.shrunk span {
+  visibility: hidden;
 }
 
 .commentary-right div .accordion {

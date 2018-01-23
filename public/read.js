@@ -203,6 +203,7 @@ var app = new Vue({
       for (var i = 0; i < startRange + 40; i++) {
         var button = this.acc[startRange + i];
         button.classList.remove("active");
+        button.classList.add("shrunk");
         var panel = button.nextElementSibling;
         panel.style.maxHeight = null;
       }
