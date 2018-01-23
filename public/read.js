@@ -122,16 +122,21 @@ var app = new Vue({
               "<span class='text'>" +
                 line.text +
                 "</span>" +
+                "<span class='translation'/>" +
                 "<span class='line-number'>" +
                 line.line_number +
                 "</span>"
             );
             if (line.translation) {
-              // add in a span with translation, update classes and add listener
+              newLine.children(".translation").append(line.translation);
+              newLine.children(".translation").addClass("translation-hidden");
+              newLine.addClass("line-translatable");
+              // Javascript to flip
             }
 
             if (line.comments.length > 0) {
-              // add line bold task and listener to text span
+              newLine.addClass("line-commented");
+              // Javascript to open comment
             }
 
             newPage.append(newLine);

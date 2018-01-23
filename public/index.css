@@ -228,3 +228,16 @@ body {
   width: 135px;
 }
 
+.translation-hidden {
+  width: 1px;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.line-translatable * {
+  text-decoration: underline;
+}
+
+.line-commented * {
+  font-weight: bold;
+}
