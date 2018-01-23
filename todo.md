@@ -9,10 +9,8 @@ Mostly done, need to
 BOOK READ PAGE
 
 * styling for comments
-  close them on page flip
-  shrink
-  figure out scrolling
-  line highlighting
+
+- translations?
 
 * test uploading and reading book end to end on something longer than 3 lines
 

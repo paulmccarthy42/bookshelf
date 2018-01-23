@@ -194,6 +194,10 @@ body {
   margin: 0;
 }
 
+.panel p {
+  font-size: 10px;
+}
+
 .small-badge {
   font-size: 10px;
 }
@@ -214,4 +218,12 @@ body {
 
 .line-number {
   visibility: hidden;
+}
+
+.comment-submit {
+  float: right;
+}
+
+.comment-input {
+  width: 135px;
 }
