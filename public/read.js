@@ -99,10 +99,8 @@ var app = new Vue({
               .css("visibility", "hidden");
           }
         );
-        // Javascript to open comment on click
+        // Javascript to translate on double click
         $(".line-translatable").dblclick(function() {
-          console.log(this);
-          console.log(this.children[0]);
           $(this)
             .children(".text")
             .toggleClass("translation-hidden");
@@ -110,7 +108,18 @@ var app = new Vue({
             .children(".translation")
             .toggleClass("translation-hidden");
         });
-        // Javascript to translate on double click
+        // Javascript to open comment on click
+        $(".line-commented").click(function() {
+          var highlightedLineNumber = parseInt(
+            $(this)
+              .children(".line-number")
+              .html()
+          );
+
+          // store line_number
+          // search acc for button that shares line number
+          // open it
+        });
       }.bind(this)
     );
     // Build the book
