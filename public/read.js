@@ -204,19 +204,19 @@ var app = new Vue({
         var button = this.acc[startRange + i];
         button.classList.remove("active");
         var panel = button.nextElementSibling;
+        console.log(i);
         panel.style.maxHeight = null;
       }
     },
     shrinkParent: function(direction) {
-      //this is called for some reason when you click the bottom note
       if (direction === "left") {
         $(".commentary-left").toggleClass("shrunk");
-        if (!$(".commentary-left").hasClass("shrunk")) {
+        if ($(".commentary-left").hasClass("shrunk")) {
           this.accordionIn(direction);
         }
       } else {
         $(".commentary-right").toggleClass("shrunk");
-        if (!$(".commentary-right").hasClass("shrunk")) {
+        if ($(".commentary-right").hasClass("shrunk")) {
           this.accordionIn(direction);
         }
       }

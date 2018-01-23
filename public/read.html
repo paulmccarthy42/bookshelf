@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div class="commentary commentary-right">
+    <div class="commentary commentary-right"  v-if="currentLeftPage > 0">
       <button v-on:click="shrinkParent('right')" class="badge badge-pill badge-success shrinker-right">></button>
       <div v-for="line in currentRightLines">
         <button class="accordion" v-on:click="accordion(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
