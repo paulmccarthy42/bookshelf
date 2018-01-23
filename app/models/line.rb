@@ -9,6 +9,7 @@ class Line < ApplicationRecord
       page_id: page_id,
       line_number: line_number,
       text: text,
+      translation: translation,
       comments: comments.as_json
     }
   end

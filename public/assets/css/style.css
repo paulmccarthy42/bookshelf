@@ -2452,3 +2452,6 @@ ul.services-list li {
 .tool-tip-line:hover + .tool-tip-info {
     visibility: visible;
 }
+
+.comment:nth-child(odd) {
+    background: rgba(174, 96, 23, .5);

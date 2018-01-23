@@ -370,7 +370,7 @@
       </div>
 
       <div class="row mt-50">
-        <div class="col-md-9 wow fadeInUp ">
+        <div class="col-md-9 wow fadeInUp comment-holder">
           <div class="comment" v-for="comment in info.comments">
             <strong>{{comment.comment_text}}</strong> by {{comment.author}}
             <div class="subcomment" v-for="subcomment in comment.subcomments">{{subcomment.comment_text}} by {{subcomment.author}}</div>
@@ -380,7 +380,7 @@
             </div>
           </div>
           <div >
-            <div class="form-group">
+            <div class="form-group comment">
             <input type="text" class="form-control" placeholder="What do you want to say?" v-model="comment">
             <button id="submit_btn" class="default-btn gray-btn" v-on:click="addComment"> Add comment <i class="fa fa-angle-double-right" aria-hidden="true"></i></button> 
             </div>

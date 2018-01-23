@@ -118,37 +118,23 @@ var app = new Vue({
           var newPage = $("<div/>");
           // add lines to flipbook
           page.lines.forEach(function(line) {
-            // add uncommented line
-            if (line.comments.length === 0) {
-              newPage.append(
-                $("<div class='line'/>").html(
-                  line.text +
-                    "<span class='line-number'>" +
-                    line.line_number +
-                    "</span>"
-                )
-              );
-              // add commented line as mark
-            } else {
-              var newLine = $("<div class='line'/>").html(
-                $("<div class='tool-tip-line' />").html(
-                  line.text +
-                    "<span class='line-number'>" +
-                    line.line_number +
-                    "</span>"
-                )
-              );
-              var text = "";
-              line.comments.forEach(function(comment) {
-                text += "- ";
-                text += comment.comment_text;
-                text += "<br>";
-              });
-
-              newLine.append($("<span class='tool-tip-info' />").html(text));
-
-              newPage.append(newLine);
+            var newLine = $("<div class='line'/>").html(
+              "<span class='text'>" +
+                line.text +
+                "</span>" +
+                "<span class='line-number'>" +
+                line.line_number +
+                "</span>"
+            );
+            if (line.translation) {
+              // add in a span with translation, update classes and add listener
             }
+
+            if (line.comments.length > 0) {
+              // add line bold task and listener to text span
+            }
+
+            newPage.append(newLine);
           });
           newPage.append(
             $("<div class='page-number'/>").html(page.page_number)
