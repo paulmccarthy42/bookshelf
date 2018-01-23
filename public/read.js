@@ -75,7 +75,8 @@ var app = new Vue({
           .catch(function(error) {
             // console.log("error. check backend");
           });
-        console.log($(".line"));
+
+        // Javascript to highlight on hover
         $(".line").hover(
           function() {
             $(this).css("background-color", "rgba(252, 244, 201, .5)");
@@ -98,6 +99,18 @@ var app = new Vue({
               .css("visibility", "hidden");
           }
         );
+        // Javascript to open comment on click
+        $(".line-translatable").dblclick(function() {
+          console.log(this);
+          console.log(this.children[0]);
+          $(this)
+            .children(".text")
+            .toggleClass("translation-hidden");
+          $(this)
+            .children(".translation")
+            .toggleClass("translation-hidden");
+        });
+        // Javascript to translate on double click
       }.bind(this)
     );
     // Build the book
@@ -127,16 +140,15 @@ var app = new Vue({
                 line.line_number +
                 "</span>"
             );
+            // mark lines as translateable
             if (line.translation) {
               newLine.children(".translation").append(line.translation);
               newLine.children(".translation").addClass("translation-hidden");
               newLine.addClass("line-translatable");
-              // Javascript to flip
             }
-
+            // mark lines as commented
             if (line.comments.length > 0) {
               newLine.addClass("line-commented");
-              // Javascript to open comment
             }
 
             newPage.append(newLine);
