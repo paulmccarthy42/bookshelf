@@ -22,7 +22,8 @@ var app = new Vue({
       currentLeftLines: [],
       currentRightLines: [],
       comment: "",
-      acc: document.getElementsByClassName("accordion")
+      acc: document.getElementsByClassName("accordion"),
+      hiddenComments: { right: false, left: false }
     };
   },
 
@@ -69,10 +70,10 @@ var app = new Vue({
               this.currentRightPage
           )
           .then(function(response) {
-            console.log(response.data);
+            // console.log(response.data);
           })
           .catch(function(error) {
-            console.log("error. check backend");
+            // console.log("error. check backend");
           });
       }.bind(this)
     );
@@ -154,23 +155,17 @@ var app = new Vue({
       console.log(this.acc);
       var button = this.acc[index];
       button.classList.toggle("active");
-
+      if (this.hiddenComments[side]) {
+        this.shrinkParent(side);
+      } else {
+        console.log("do nothing");
+      }
       var panel = button.nextElementSibling;
       if (panel.style.maxHeight) {
         panel.style.maxHeight = null;
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
-      var holder = button.parentElement;
-      holder.style.height =
-        (
-          parseInt(panel.style.maxHeight) +
-          parseInt(button.style.maxHeight) +
-          15
-        ).toString() + "px";
-      console.log("Holder", holder.style);
-      console.log("Panel", panel.style);
-      console.log("Button", button.style);
     },
     shrinkParent: function(direction) {
       if (direction === "left") {
@@ -186,7 +181,11 @@ var app = new Vue({
           $(".commentary-right").css("width", "200px");
         }
       }
+      this.hiddenComments[direction] = !this.hiddenComments[direction];
     },
+    hideAccordion: function() {},
+    // unshrink parent on accordionOut being called
+    // accordion in on each when
 
     addComment: function(lineId) {
       var params = {};
