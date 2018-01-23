@@ -205,3 +205,7 @@ body {
   position: absolute;
   left: 1px;
 }
+
+.line-number {
+  visibility: hidden;
+}

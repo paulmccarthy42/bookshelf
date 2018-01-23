@@ -75,6 +75,29 @@ var app = new Vue({
           .catch(function(error) {
             // console.log("error. check backend");
           });
+        console.log($(".line"));
+        $(".line").hover(
+          function() {
+            $(this).css("background-color", "rgba(252, 244, 201, .5)");
+            $(this)
+              .children(".line-number")
+              .css("visibility", "visible");
+            $(this)
+              .children("div")
+              .children(".line-number")
+              .css("visibility", "visible");
+          },
+          function() {
+            $(this).css("background-color", "");
+            $(this)
+              .children(".line-number")
+              .css("visibility", "hidden");
+            $(this)
+              .children("div")
+              .children(".line-number")
+              .css("visibility", "hidden");
+          }
+        );
       }.bind(this)
     );
     // Build the book
@@ -97,11 +120,23 @@ var app = new Vue({
           page.lines.forEach(function(line) {
             // add uncommented line
             if (line.comments.length === 0) {
-              newPage.append($("<div class='line'/>").html(line.text));
+              newPage.append(
+                $("<div class='line'/>").html(
+                  line.text +
+                    "<span class='line-number'>" +
+                    line.line_number +
+                    "</span>"
+                )
+              );
               // add commented line as mark
             } else {
               var newLine = $("<div class='line'/>").html(
-                $("<div class='tool-tip-line' />").html(line.text)
+                $("<div class='tool-tip-line' />").html(
+                  line.text +
+                    "<span class='line-number'>" +
+                    line.line_number +
+                    "</span>"
+                )
               );
               var text = "";
               line.comments.forEach(function(comment) {
@@ -109,6 +144,7 @@ var app = new Vue({
                 text += comment.comment_text;
                 text += "<br>";
               });
+
               newLine.append($("<span class='tool-tip-info' />").html(text));
 
               newPage.append(newLine);
@@ -134,14 +170,6 @@ var app = new Vue({
           .catch(function(error) {
             $("#flipbook").turn("page", 0);
           });
-        $(".line").hover(
-          function() {
-            $(this).css("background-color", "rgba(252, 244, 201, .5)");
-          },
-          function() {
-            $(this).css("background-color", "white");
-          }
-        );
       }.bind(this)
     );
   },
