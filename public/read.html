@@ -56,21 +56,23 @@
         </div>
       </div>
 
-      <div class="commentary commentary-right"  v-if="currentLeftPage > 0">
-        <button v-on:click="shrinkParent('right')" class="badge badge-pill badge-success shrinker-right">></button>
-        <div v-for="line in currentRightLines">
-          <button class="accordion" v-on:click="accordion(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
-          <div class="panel">
-            <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
-            <div><input type="text" v-model="comment" class='comment-input'><a v-on:click="addComment(line.id)" ><button class="comment-submit">add</button></a></div>
+      <div class="commentary-container">
+        <div class="commentary commentary-right"  v-if="currentLeftPage > 0">
+          <button v-on:click="shrinkParent('right')" class="badge badge-pill badge-success shrinker-right">></button>
+          <div v-for="line in currentRightLines">
+            <button class="accordion" v-on:click="accordion(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
+            <div class="panel">
+              <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
+              <div><input type="text" v-model="comment" class='comment-input'><a v-on:click="addComment(line.id)" ><button class="comment-submit">add</button></a></div>
 
 
 
+            </div>
           </div>
+          <!-- <div v-for="line in currentRightLines">
+            {{line.comments.length}}
+          </div> -->
         </div>
-        <!-- <div v-for="line in currentRightLines">
-          {{line.comments.length}}
-        </div> -->
       </div>
     </div>
     <div class="toolbar-read-page">

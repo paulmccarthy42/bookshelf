@@ -201,6 +201,7 @@ body {
 }
 
 .toolbar-read-page {
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -255,4 +256,8 @@ body {
 .box {
   display: flex;
   margin-left: 20px;
+}
+
+.commentary-container {
+  min-width: 200px;
 }
