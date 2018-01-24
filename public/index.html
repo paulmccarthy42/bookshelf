@@ -365,13 +365,15 @@
         <div class="section-title">
           <h2 class="mb-50">{{info.title}}</h2>
           <h5 class="mb-50">by {{info.author}}</h5>
-          <div>Description: {{info.description}}</div>
         </div>
       </div>
       </div>
 
       <div class="row mt-50">
         <div class="col-md-9 wow fadeInUp comment-holder">
+          <div v-for="details in description">
+          <p>{{details}}</p>
+        </div>
           <div class="comment" v-for="comment in info.comments">
             <strong>{{comment.comment_text}}</strong> by {{comment.author}}
             <div class="subcomment" v-for="subcomment in comment.subcomments">{{subcomment.comment_text}} by {{subcomment.author}}</div>

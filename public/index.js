@@ -99,13 +99,15 @@ var BookSummaryPage = {
       currentUser: {},
       selectedShelf: "",
       comment: "",
-      subcommentsText: {}
+      subcommentsText: {},
+      description: []
     };
   },
   created: function() {
     axios.get("/v1/books/" + this.$route.params.id).then(
       function(response) {
         this.info = response.data;
+        this.description = response.data.description.split("\n");
         console.log(this.info);
       }.bind(this)
     );

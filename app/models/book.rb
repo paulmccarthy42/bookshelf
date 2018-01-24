@@ -91,7 +91,8 @@ class Book < ApplicationRecord
       published_year: published_year,
       pages: pages.length,
       comments: comments.as_json,
-      cover_image: cover_image 
+      cover_image: cover_image,
+      description: description
     }
   end
 end
