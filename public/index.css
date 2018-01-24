@@ -216,6 +216,9 @@ body {
   left: 1px;
 }
 
+.line {
+  display: flex;
+}
 /*line of text*/
 /*.text {
   float: left;

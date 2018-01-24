@@ -75,9 +75,11 @@ var HomePage = {
     toggleActive: function(shelfID) {
       console.log(shelfID);
       var shelfIndex = this.bookshelves.findIndex(function(shelf) {
+        console.log(shelf.id);
         return shelf.id === shelfID;
       });
       this.bookshelves[shelfIndex] = true;
+      console.log(shelfIndex);
     },
     signedIn: function() {
       console.log(this.$parent.$data.signedIn);
@@ -130,7 +132,7 @@ var BookSummaryPage = {
       );
   },
   mounted: function() {
-    initalizeTheme();
+    // initalizeTheme();
     console.log("hello");
     $(".site-hero_2").css("background-image", "url(info.cover_image)");
   },

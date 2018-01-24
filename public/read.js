@@ -107,6 +107,7 @@ var app = new Vue({
           $(this)
             .children(".translation")
             .toggleClass("translation-hidden");
+          console.log($(this).children(".translation")[0].innerHTML);
         });
         // Javascript to open comment on click
         var that = this;
@@ -205,7 +206,7 @@ var app = new Vue({
         index += 40;
       }
       this.comment = "";
-      console.log(this.acc);
+      // console.log(this.acc);
       var button = this.acc[index];
       button.classList.toggle("active");
       if (this.hiddenComments[side]) {

@@ -11,7 +11,7 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
-  
+
   <script src="index.js" defer></script>
 
   <!-- THEME -->
@@ -140,11 +140,11 @@
   <script type="text/javascript" src="assets/js/jquery.flexslider-min.js"></script>
   <script type="text/javascript" src="assets/js/jquery.animsition.min.js"></script>
   <script type="text/javascript" src="assets/js/init.js"></script>
-  <script type="text/javascript" src="assets/js/main.js"></script>
   <script type="text/javascript" src="assets/js/smooth-scroll.js"></script>
   <script type="text/javascript" src="assets/js/numscroller.js"></script>
   <script type="text/javascript" src="assets/js/wow.min.js"></script>
   <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
 
  
 
@@ -227,7 +227,7 @@
               <a class="btn btn-primary" href="#/sign_up">Sign Up New User</a>
             </div>
             <h1>Text explaining purpose of site</h1>
-            <a v-if="signedIn()" v-bind:href="'http://localhost:3000/read.html#/' + currentUser.last_read_book.id ">Reopen Last Book Read</a>
+            <a v-if="signedIn()" v-bind:href="'http://localhost:3000/read.html#/' + currentUser.last_read_book ">Reopen Last Book Read, {{currentUser.last_read_book}}</a>
 
           </div>
         </div><!-- description text -->
