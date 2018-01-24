@@ -22,6 +22,7 @@ var app = new Vue({
       currentLeftLines: [],
       currentRightLines: [],
       comment: "",
+      finishedLineSetup: false,
       acc: document.getElementsByClassName("accordion"),
       hiddenComments: { right: false, left: false }
     };
@@ -39,7 +40,7 @@ var app = new Vue({
     // Create the turn book
     console.log("hello", $("#flipbook"));
     $("#flipbook").turn({
-      width: 1000,
+      width: 800,
       height: 700,
       autoCenter: true
     });
@@ -99,41 +100,8 @@ var app = new Vue({
               .css("visibility", "hidden");
           }
         );
-        // Javascript to translate on double click
-        $(".line-translatable").dblclick(function() {
-          $(this)
-            .children(".text")
-            .toggleClass("translation-hidden");
-          $(this)
-            .children(".translation")
-            .toggleClass("translation-hidden");
-          console.log($(this).children(".translation")[0].innerHTML);
-        });
-        // Javascript to open comment on click
-        var that = this;
-        $(".line-commented").click(function() {
-          // store line_number
-          var highlightedLineNumber = $(this)
-            .children(".line-number")
-            .html();
-          // search acc for button that shares line number
-          console.log(highlightedLineNumber);
-
-          for (var x = 0; x < that.acc.length; x++) {
-            if (that.acc[x].innerHTML.split(" ")[0] === highlightedLineNumber) {
-              console.log(
-                "hello",
-                that.acc[x].innerHTML.split(" ")[0],
-                highlightedLineNumber
-              );
-              var indexOnPage = x % 40;
-              var side = indexOnPage === x ? "left" : "right";
-              // open it
-              that.accordion(indexOnPage, side);
-              that.acc[x].focus();
-            }
-          }
-        });
+        this.setupLineEvents();
+        // end of jquery blob
       }.bind(this)
     );
     // Build the book
@@ -281,6 +249,47 @@ var app = new Vue({
         .catch(function(error) {
           console.log(error);
         });
+    },
+    setupLineEvents: function() {
+      if (this.finishedLineSetup) {
+        return true;
+      }
+      // start of jquery blob
+      // Javascript to translate on double click
+      $(".line-translatable").dblclick(function() {
+        $(this)
+          .children(".text")
+          .toggleClass("translation-hidden");
+        $(this)
+          .children(".translation")
+          .toggleClass("translation-hidden");
+      });
+      // Javascript to open comment on click
+      var that = this;
+      $(".line-commented").click(function() {
+        // store line_number
+        var highlightedLineNumber = $(this)
+          .children(".line-number")
+          .html();
+        // search acc for button that shares line number
+        console.log(highlightedLineNumber);
+
+        for (var x = 0; x < that.acc.length; x++) {
+          if (that.acc[x].innerHTML.split(" ")[0] === highlightedLineNumber) {
+            console.log(
+              "hello",
+              that.acc[x].innerHTML.split(" ")[0],
+              highlightedLineNumber
+            );
+            var indexOnPage = x % 40;
+            var side = indexOnPage === x ? "left" : "right";
+            // open it
+            that.accordion(indexOnPage, side);
+            that.acc[x].focus();
+          }
+        }
+      });
+      this.finishedLineSetup = true;
     }
   }
 });

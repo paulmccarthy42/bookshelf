@@ -471,5 +471,11 @@ var app = new Vue({
           }.bind(this)
         );
     }
+  },
+  watch: {
+    $route: function() {
+      console.log("changed route...");
+      location.reload();
+    }
   }
 });
