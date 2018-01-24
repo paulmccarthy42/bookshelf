@@ -41,7 +41,7 @@ var app = new Vue({
     console.log("hello", $("#flipbook"));
     $("#flipbook").turn({
       width: 800,
-      height: 700,
+      height: 650,
       autoCenter: true
     });
     // create events on page turn
