@@ -253,42 +253,51 @@ var app = new Vue({
     setupLineEvents: function() {
       if (this.finishedLineSetup) {
         return true;
-      }
-      // start of jquery blob
-      // Javascript to translate on double click
-      $(".line-translatable").dblclick(function() {
-        $(this)
-          .children(".text")
-          .toggleClass("translation-hidden");
-        $(this)
-          .children(".translation")
-          .toggleClass("translation-hidden");
-      });
-      // Javascript to open comment on click
-      var that = this;
-      $(".line-commented").click(function() {
-        // store line_number
-        var highlightedLineNumber = $(this)
-          .children(".line-number")
-          .html();
-        // search acc for button that shares line number
-        console.log(highlightedLineNumber);
+      } else {
+        // start of jquery blob
+        // Javascript to translate on double click
+        $(".line-translatable").dblclick(function() {
+          $(this)
+            .children(".text")
+            .toggleClass("translation-hidden");
+          $(this)
+            .children(".translation")
+            .toggleClass("translation-hidden");
+        });
+        // Javascript to open comment on click
+        var that = this;
+        $(".line-commented").click(function() {
+          // store line_number
+          var highlightedLineNumber = $(this)
+            .children(".line-number")
+            .html();
+          // search acc for button that shares line number
+          console.log(highlightedLineNumber);
 
-        for (var x = 0; x < that.acc.length; x++) {
-          if (that.acc[x].innerHTML.split(" ")[0] === highlightedLineNumber) {
-            console.log(
-              "hello",
-              that.acc[x].innerHTML.split(" ")[0],
-              highlightedLineNumber
-            );
-            var indexOnPage = x % 40;
-            var side = indexOnPage === x ? "left" : "right";
-            // open it
-            that.accordion(indexOnPage, side);
-            that.acc[x].focus();
+          for (var x = 0; x < that.acc.length; x++) {
+            if (that.acc[x].innerHTML.split(" ")[0] === highlightedLineNumber) {
+              console.log(
+                "hello",
+                that.acc[x].innerHTML.split(" ")[0],
+                highlightedLineNumber
+              );
+              var indexOnPage = x % 40;
+              var side = indexOnPage === x ? "left" : "right";
+              // open it
+              that.accordion(indexOnPage, side);
+              // that.acc[x].focus();
+              var element =
+                side === "right" || that.acc.length === 40
+                  ? $(".commentary-right")
+                  : $(".commentary-left");
+              element.animate(
+                { scrollTop: $(that.acc[indexOnPage]).offset().top + 1 },
+                500
+              );
+            }
           }
-        }
-      });
+        });
+      }
       this.finishedLineSetup = true;
     }
   }
