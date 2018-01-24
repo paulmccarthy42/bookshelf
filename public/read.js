@@ -154,13 +154,13 @@ var app = new Vue({
           // add lines to flipbook
           page.lines.forEach(function(line) {
             var newLine = $("<div class='line'/>").html(
-              "<span class='text'>" +
+              "<div class='text'>" +
                 line.text +
-                "</span>" +
-                "<span class='translation'/>" +
-                "<span class='line-number'>" +
+                "</div>" +
+                "<div class='translation'/>" +
+                "<div class='line-number'>" +
                 line.line_number +
-                "</span>"
+                "</div>"
             );
             // mark lines as translateable
             if (line.translation) {

@@ -216,9 +216,20 @@ body {
   left: 1px;
 }
 
+/*line of text*/
+/*.text {
+  float: left;
+}
+
+.translation {
+  float: left;
+}*/
+
 .line-number {
   visibility: hidden;
 }
+
+/*end line*/
 
 .comment-submit {
   float: right;
@@ -230,6 +241,7 @@ body {
 
 .translation-hidden {
   width: 1px;
+  height: 1px;
   visibility: hidden;
   overflow: hidden;
 }
