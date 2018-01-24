@@ -219,14 +219,11 @@ body {
 .line {
   display: flex;
 }
-/*line of text*/
-/*.text {
-  float: left;
-}
 
 .translation {
-  float: left;
-}*/
+  background-color: black;
+  color: white;
+}
 
 .line-number {
   visibility: hidden;

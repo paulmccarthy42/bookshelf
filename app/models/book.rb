@@ -78,7 +78,7 @@ class Book < ApplicationRecord
   def cover_image
     images.find_by(cover: true) ? 
       images.find_by(cover: true).image 
-      : nil
+      : Image.find_by(name: "default").image
   end
 
   def as_json
@@ -91,7 +91,7 @@ class Book < ApplicationRecord
       published_year: published_year,
       pages: pages.length,
       comments: comments.as_json,
-      cover_image: cover_image
+      cover_image: cover_image 
     }
   end
 end
