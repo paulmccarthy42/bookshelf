@@ -103,7 +103,6 @@
                               Email: pmccarthy4242@gmail.com <br>
                           </div>
                       </div>
-                      End Twitter Widget
 
                       <div class="col-md-3 col-xs-12">
                           <div class="footer-widget company-links">
@@ -310,9 +309,6 @@
       </div>
       <!-- end container -->
     </section>
-    <section v-if="signedIn()">  
-      <p>last notes</p>
-    </section>
     </div>
   </div>
 </template>
@@ -398,16 +394,19 @@
             <li>Published in {{info.published_year}}</li>
             <li>{{info.comments.length}} Comments</li>
             <li>{{info.comments.length}} Public Resources Posted</li>
-            <li>
-              <a v-bind:href="'/read.html#/' + info.id"><button>read</button></a>
-            </li>
+
+              <!-- <a v-bind:href="'/read.html#/' + info.id"><button>read</button></a> -->
+
             <li>
               <datalist id=titles>
                 <option v-for="shelf in bookshelves">{{shelf.title}}</option>
               </datalist>
               <input type="text" placeholder="Search by title" v-model="selectedShelf" list="titles">
-              <button v-on:click="shelveABook">add to shelf</button>
-            </li>
+              <!-- <button v-on:click="shelveABook">add to shelf</button> -->
+            <button id="submit_btn" class="default-btn gray-btn" v-on:click="shelveABook"> add to shelf <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+
+            </li><li>
+            <a v-bind:href="'/read.html#/' + info.id"><button id="submit_btn" class="default-btn gray-btn"> Read <i class="fa fa-angle-double-right" aria-hidden="true"></i></button> </a></li>
           </ul>
         </div>
       </div>
