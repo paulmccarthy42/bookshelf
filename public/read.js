@@ -127,10 +127,10 @@ var app = new Vue({
               );
               var indexOnPage = x % 40;
               var side = indexOnPage === x ? "left" : "right";
+              // open it
               that.accordion(indexOnPage, side);
+              that.acc[x].focus();
             }
-
-            // open it
           }
         });
       }.bind(this)

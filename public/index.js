@@ -386,7 +386,7 @@ var router = new VueRouter({
     { path: "/", component: HomePage },
     { path: "/book/search/", component: SearchBookPage }, // maybe cuttable
     { path: "/book/:id", component: BookSummaryPage },
-    { path: "/bookshelves/:id", component: BookShelfPage }, //likely cuttable
+    // { path: "/bookshelves/:id", component: BookShelfPage },
     { path: "/sign_up", component: SignUpPage }, //move to modal
     { path: "/login", component: LoginPage }, //move to modal
     { path: "/logout", component: LogoutPage }
