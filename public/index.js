@@ -242,7 +242,8 @@ var SearchBookPage = {
       bookInfo: {},
       errors: [],
       OCRText: "",
-      newBook: {}
+      newBook: {},
+      searchedBook: ""
     };
   },
   created: function() {

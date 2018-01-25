@@ -42,7 +42,15 @@
             <button class="accordion" v-on:click="accordion(currentLeftLines.indexOf(line), 'left')">{{line.line_number}} <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
             <div class="panel">
               <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
-              <div><input type="text" v-model="comment" class='comment-input'><a v-on:click="addComment(line.id)" ><button class="comment-submit">add</button></a></div>
+              <div>
+                <!-- <input type="text" v-model="comment" class='comment-input'> -->
+                <textarea type="text" v-model="comment" class='comment-input'></textarea>
+                  <a v-on:click="addComment(line.id)" >
+                  <button class="comment-submit">
+                  add
+                </button>
+              </a>
+            </div>
             </div>
           </div>
         </div>
@@ -63,7 +71,14 @@
             <button class="accordion" v-on:click="accordion(currentRightLines.indexOf(line), 'right')">{{line.line_number}}  <span class = "small-badge badge badge-pill badge-primary">{{line.comments.length}}</span></button>
             <div class="panel">
               <p v-for="comment in line.comments">- {{comment.comment_text}}</p>
-              <div><input type="text" v-model="comment" class='comment-input'><a v-on:click="addComment(line.id)" ><button class="comment-submit">add</button></a></div>
+              <div>
+                <textarea type="text" v-model="comment" class='comment-input'></textarea>
+                  <a v-on:click="addComment(line.id)" >
+                    <button class="comment-submit">
+                      add
+                    </button>
+                  </a>
+              </div>
 
 
 
