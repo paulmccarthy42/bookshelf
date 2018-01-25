@@ -81,6 +81,16 @@ class Book < ApplicationRecord
       : Image.find_by(name: "default").image
   end
 
+  def count_public_resources
+    count = 0
+    pages.each do |page|
+      page.lines.each do |line|
+        count += line.comments.length
+      end
+    end
+    return count
+  end
+
   def as_json
     {
       id: id,
@@ -92,7 +102,8 @@ class Book < ApplicationRecord
       pages: pages.length,
       comments: comments.as_json,
       cover_image: cover_image,
-      description: description
+      description: description,
+      public_resources: count_public_resources
     }
   end
 end
