@@ -73,13 +73,16 @@ var HomePage = {
         });
     },
     toggleActive: function(shelfID) {
-      console.log(shelfID);
-      var shelfIndex = this.bookshelves.findIndex(function(shelf) {
-        console.log(shelf.id);
-        return shelf.id === shelfID;
-      });
-      this.bookshelves[shelfIndex] = true;
-      console.log(shelfIndex);
+      console.log("start", shelfID);
+      var shelfIndex = this.bookshelves.findIndex(
+        function(shelf) {
+          console.log("inner", shelf.id);
+          return shelf.id === shelfID;
+        }.bind(this)
+      );
+      this.bookshelves[shelfIndex].isActive = true;
+      console.log("end", this.bookshelves[shelfIndex]);
+      console.log("all shelves", this.bookshelves);
     },
     signedIn: function() {
       console.log(this.$parent.$data.signedIn);
