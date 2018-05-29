@@ -73,16 +73,30 @@ var HomePage = {
         });
     },
     toggleActive: function(shelfID) {
+      // console.log("hello", shelfClassTitle);
+      // $("a.shelfClassTitle").toggleClass("active");
       console.log("start", shelfID);
-      var shelfIndex = this.bookshelves.findIndex(
-        function(shelf) {
-          console.log("inner", shelf.id);
-          return shelf.id === shelfID;
-        }.bind(this)
-      );
+      // var shelfIndex = this.bookshelves.findIndex(
+      //   function(shelf) {
+      //     console.log("inner", shelf.id);
+      //     return shelf.id === shelfID;
+      //   }.bind(this)
+      // );
+      var shelfIndex = -1;
+      var innerIndex = 0;
+      this.bookshelves.forEach(function(shelf) {
+        if (shelf.id === shelfID) {
+          shelfIndex = innerIndex;
+        }
+        innerIndex += 1;
+      });
       this.bookshelves[shelfIndex].isActive = true;
-      console.log("end", this.bookshelves[shelfIndex]);
-      console.log("all shelves", this.bookshelves);
+
+      // console.log("end", this.bookshelves[shelfIndex]);
+      // console.log("all shelves", this.bookshelves);
+    },
+    test: function(shelf) {
+      console.log(shelf);
     },
     signedIn: function() {
       console.log(this.$parent.$data.signedIn);
@@ -287,10 +301,12 @@ var SearchBookPage = {
           this.OCRText = "";
           this.newBook = {};
           this.booksOnfile.push(response.data);
+          location.reload();
           // UNTESTED
         })
         .catch(function(errors) {
           console.log(errors);
+          location.reload();
         });
     }
   },

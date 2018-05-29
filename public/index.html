@@ -185,6 +185,7 @@
         });
         return false;
       });
+        console.log("heelo")
     });
   </script>
 
@@ -268,7 +269,8 @@
               <ul class="portfolio_filter">
                 <li><a href="" class="active" data-filter="*">all</a></li>
                 <div v-for="shelf in bookshelves">
-                  <li><a  v-bind:data-filter="'.'+ shelf.classTitle" v-on:click="toggleActive(shelf.id)" v-bind:class="{ active : shelf.isActive}">{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
+                  <li><a href="" v-bind:data-filter="'.'+ shelf.classTitle" >{{shelf.title}}</a></li> <!-- this line needs to not refresh -->
+
                 </div>
                 <input type="text" placeholder="New Shelf Name" v-model='NewShelfName'>
                 <li><a v-on:click="submitNewShelf" class="active">+ new shelf</a></li>
@@ -280,7 +282,7 @@
         <div class="col-md-9">
           <div class="row portfolio_container">
             <!-- add button -->
-            <div class="col-md-4" style="position: relative;">
+            <!-- <div class="col-md-4" style="position: relative;">
               <a href="#/book/search" class="portfolio_item work-grid">
                 <img src="assets/img/add.png" alt="image">
                 <div class="portfolio_item_hover">
@@ -289,7 +291,7 @@
                   </div>
                 </div>
               </a>
-            </div> 
+            </div>  -->
             <!-- books -->
             <div class="col-md-4" v-for="book in books" v-bind:class="book.shelf">
               <a v-bind:href="'#/book/' + book.id" class="portfolio_item work-grid">
